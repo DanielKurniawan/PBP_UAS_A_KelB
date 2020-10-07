@@ -21,4 +21,13 @@
     <string name="Chat">Chat</string>
     <string name="User">User</string>
 
+    <!-- Daniel -->
+    <string name="pbp">PBP</string>
+    <string name="cart">Cart</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="ongkos_kirim">Ongkos Kirim</string>
+    <string name="total_harga">Total Harga</string>
+    <string name="proceed_to_checkout">Proceed to Checkout</string>
+    <string name="image">Image</string>
+    <string name="list_barang">List Barang</string>
 </resources>

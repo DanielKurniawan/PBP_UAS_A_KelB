@@ -8,21 +8,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import uts.uajy.kelompok_b_jualonline.Fragment.Cart_Fragment;
 import uts.uajy.kelompok_b_jualonline.Fragment.Chat_Fragment;
 import uts.uajy.kelompok_b_jualonline.Fragment.Home_Fragment;
 import uts.uajy.kelompok_b_jualonline.Fragment.User_Fragment;
-import uts.uajy.kelompok_b_jualonline.R;
 
 public class MainActivity extends AppCompatActivity {
 
