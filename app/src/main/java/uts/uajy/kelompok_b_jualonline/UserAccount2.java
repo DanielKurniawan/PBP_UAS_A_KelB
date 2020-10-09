@@ -1,7 +1,5 @@
 package uts.uajy.kelompok_b_jualonline;
 
-
-
 public class UserAccount2  {
 
     private String Username;

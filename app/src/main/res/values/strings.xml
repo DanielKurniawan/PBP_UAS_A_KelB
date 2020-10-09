@@ -30,4 +30,8 @@
     <string name="proceed_to_checkout">Proceed to Checkout</string>
     <string name="image">Image</string>
     <string name="list_barang">List Barang</string>
+    <string name="fab_content_desc">fab</string>
+    <string name="extended_fab_content_desc">add_to_cart</string>
+    <string name="extended_fab_label">Add to Cart</string>
+    <string name="list_cart">List Cart</string>
 </resources>

@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.Home_Fragment">
-
     <RelativeLayout
         android:id="@+id/relative_layoutPBP"
         android:layout_width="match_parent"
@@ -41,5 +40,19 @@
             tools:layout_editor_absoluteX="17dp"
             tools:listitem="@layout/adapter_recycler_view_barang"/>
     </RelativeLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/extended_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_gravity="bottom|right"
+            android:contentDescription="@string/extended_fab_content_desc"
+            android:text="@string/extended_fab_label"
+            app:icon="@drawable/ic_baseline_shopping_cart_24"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 </RelativeLayout>
