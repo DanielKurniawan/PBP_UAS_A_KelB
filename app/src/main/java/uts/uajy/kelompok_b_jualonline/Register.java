@@ -12,19 +12,16 @@ import uts.uajy.kelompok_b_jualonline.databinding.RegisterBinding;
 import uts.uajy.kelompok_b_jualonline.RegisterViewModel;
 
 public class Register extends AppCompatActivity {
-
     private RegisterBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.register);
 
+        binding = DataBindingUtil.setContentView(this, R.layout.register);
         binding.setRVM(new RegisterViewModel());
         binding.executePendingBindings();
     }
-
-    public static void startLoginActivity(Context mContext) {
+    public static void startActivityLogin(Context mContext) {
         Intent i = new Intent(mContext, MainActivity.class);
         mContext.startActivity(i);
     }

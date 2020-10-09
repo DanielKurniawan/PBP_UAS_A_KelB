@@ -59,13 +59,13 @@
             android:layout_marginTop="20dp"
             android:clickable="true"
             android:layout_gravity="center"
-            android:onClick="@{}"
+            android:onClick="@{LVM.btnLogin}"
             android:text="@string/Login" />
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{}"
+            android:onClick="@{LVM.btnSignUp}"
             android:layout_gravity="center"
             android:text="@string/SignUp"
             app:backgroundTint="@color/colorAccent" />

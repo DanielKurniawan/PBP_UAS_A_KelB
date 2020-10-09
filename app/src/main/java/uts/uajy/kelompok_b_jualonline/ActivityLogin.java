@@ -1,4 +1,5 @@
 package uts.uajy.kelompok_b_jualonline;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import android.content.Context;
@@ -9,15 +10,14 @@ import uts.uajy.kelompok_b_jualonline.databinding.ActivityLoginBinding;
 import uts.uajy.kelompok_b_jualonline.LoginViewModel;
 
 public class ActivityLogin extends AppCompatActivity{
-    private ActivityLoginBinding binding;
+    private ActivityLoginBinding LoginBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-
-        binding.setLVM(new LoginViewModel());
-        binding.executePendingBindings();
+        LoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        LoginBinding.setLVM(new LoginViewModel());
+        LoginBinding.executePendingBindings();
     }
     public static void startMainActivity(Context mContext) {
         Intent i = new Intent(mContext, MainActivity.class);

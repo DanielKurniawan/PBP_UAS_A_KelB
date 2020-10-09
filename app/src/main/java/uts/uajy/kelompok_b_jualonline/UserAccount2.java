@@ -21,7 +21,7 @@ public class UserAccount2  {
         this.Password = Password;
     }
 
-    public UserAccount2(String s, String s1) {
+    public UserAccount2(String email, String password) {
     }
 
 
