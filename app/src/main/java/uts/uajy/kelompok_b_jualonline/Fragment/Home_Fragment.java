@@ -1,7 +1,10 @@
 package uts.uajy.kelompok_b_jualonline.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,9 +21,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 import uts.uajy.kelompok_b_jualonline.BarangRecyclerViewAdapter;
+import uts.uajy.kelompok_b_jualonline.MainActivity;
 import uts.uajy.kelompok_b_jualonline.R;
 import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
 import uts.uajy.kelompok_b_jualonline.modelBarang.DataBarang;
+import uts.uajy.kelompok_b_jualonline.persistencedata.sharedpref;
 
 import static android.content.ContentValues.TAG;
 
@@ -30,9 +35,30 @@ public class Home_Fragment extends Fragment {
     BarangRecyclerViewAdapter adapter;
     RecyclerView.LayoutManager mLayoutManager;
     FloatingActionButton addtocart;
+    sharedpref sharedpref;
+    Boolean checkTheme;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_, container, false);
+//        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+//            getActivity().setTheme(R.style.darktheme);
+//        }
+//        else {
+//            getActivity().setTheme(R.style.AppTheme);
+//        }
+//        sharedpref = ((MainActivity)getActivity()).getSharedpref();
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("filename", Context.MODE_PRIVATE);
+        checkTheme = sharedPreferences.getBoolean("NightMode",false);
+        if(checkTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            getContext().setTheme(R.style.darktheme);
+
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            getContext().setTheme(R.style.AppTheme);
+        }
 
         //get the dummy data
         listBarang = new DataBarang().listBarang;

@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundcolor"
     tools:context=".Fragment.Home_Fragment">
     <RelativeLayout
         android:id="@+id/relative_layoutPBP"
@@ -17,14 +18,14 @@
             android:layout_height="wrap_content"
             android:text="@string/list_barang"
             android:textStyle="bold"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
+            android:textColor="?attr/textcolor"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_20"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|end"
             android:contentDescription="@string/extended_fab_content_desc"
             android:text="@string/extended_fab_label"
             app:icon="@drawable/ic_baseline_shopping_cart_24"/>

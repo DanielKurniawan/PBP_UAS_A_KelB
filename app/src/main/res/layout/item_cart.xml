@@ -10,6 +10,7 @@
         style="@style/TextAppearance.MaterialComponents.Overline"
         android:layout_marginStart="5dp"
         android:id="@+id/number"
+        android:textColor="?attr/textcolor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -17,6 +18,7 @@
         style="@style/TextAppearance.MaterialComponents.Button"
         android:layout_marginStart="5dp"
         android:id="@+id/fullname"
+        android:textColor="?attr/textcolor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -24,6 +26,7 @@
         style="@style/TextAppearance.MaterialComponents.Overline"
         android:layout_marginStart="5dp"
         android:id="@+id/age"
+        android:textColor="?attr/textcolor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <View
@@ -31,5 +34,4 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#B3B2B2"/>
-
 </LinearLayout>

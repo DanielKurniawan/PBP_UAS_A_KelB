@@ -10,9 +10,8 @@
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="?attr/colorPrimary"
         android:gravity="center">
-
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/Profile"
             style="@style/TextAppearance.MaterialComponents.Headline4"
@@ -32,8 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/relative_layout"
-
-        android:gravity="center">
+        android:background="?attr/cardbackground"
+        android:gravity="top">
         <LinearLayout
             android:id="@+id/linlayNama"
             android:layout_width="match_parent"
@@ -47,11 +46,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama : "
+                android:textColor="?attr/textcolor"
                 style="@style/TextAppearance.MaterialComponents.Body1"/>
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtNama"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="?attr/textcolor"
                 android:text="DATA BINDING NAMA"
                 style="@style/TextAppearance.MaterialComponents.Body1"/>
         </LinearLayout>
@@ -69,12 +70,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email : "
+                android:textColor="?attr/textcolor"
                 style="@style/TextAppearance.MaterialComponents.Body1"/>
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DATA BINDING EMAIL"
+                android:textColor="?attr/textcolor"
                 style="@style/TextAppearance.MaterialComponents.Body1"/>
         </LinearLayout>
         <LinearLayout
@@ -91,12 +94,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phone Number : "
+                android:textColor="?attr/textcolor"
                 style="@style/TextAppearance.MaterialComponents.Body1"/>
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DATA BINDING PHONE NUMBER"
+                android:textColor="?attr/textcolor"
                 style="@style/TextAppearance.MaterialComponents.Body1"/>
         </LinearLayout>
         <LinearLayout
@@ -113,12 +118,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Alamat : "
+                android:textColor="?attr/textcolor"
                 style="@style/TextAppearance.MaterialComponents.Body1"/>
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtAlamat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DATA BINDING ALAMAT"
+                android:textColor="?attr/textcolor"
                 style="@style/TextAppearance.MaterialComponents.Body1"/>
         </LinearLayout>
         <LinearLayout
@@ -135,13 +142,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Username : "
+                android:textColor="?attr/textcolor"
                 style="@style/TextAppearance.MaterialComponents.Body1"/>
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DATA BINDING USERNAME"
+                android:textColor="?attr/textcolor"
                 style="@style/TextAppearance.MaterialComponents.Body1"/>
         </LinearLayout>
     </RelativeLayout>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:contentDescription="@string/fab_content_desc"
+            app:srcCompat="@drawable/ic_settings"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>
