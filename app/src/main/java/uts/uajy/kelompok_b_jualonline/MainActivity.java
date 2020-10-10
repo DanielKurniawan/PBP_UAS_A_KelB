@@ -19,6 +19,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
+import androidx.core.app.NotificationCompat;
+
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 import uts.uajy.kelompok_b_jualonline.Fragment.Cart_Fragment;
 import uts.uajy.kelompok_b_jualonline.Fragment.Chat_Fragment;
 import uts.uajy.kelompok_b_jualonline.Fragment.Home_Fragment;
@@ -36,6 +50,12 @@ public class MainActivity extends AppCompatActivity{
     public sharedpref sharedpref;
     public Bundle mBundle;
     public Boolean checkTheme;
+
+    private String CHANNEL_ID="Channel 1";
+    Button signout;
+    FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,5 +139,33 @@ public class MainActivity extends AppCompatActivity{
 
     public sharedpref getSharedpref (){
         return sharedpref;
+    }
+
+    private void createNotificationChannel(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("Goodbye")
+                .setContentText("Comeback Again...")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        Intent notifcationIntent= new Intent(this,MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0, notifcationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(0,builder.build());
+    }
+    private void addNotification(){
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+            CharSequence name = "Channel 1";
+            String description = "This is Channel 1";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,name,importance);
+            channel.setDescription(description);
+
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }
