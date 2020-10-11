@@ -14,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import uts.uajy.kelompok_b_jualonline.MainActivity;
+import uts.uajy.kelompok_b_jualonline.MapActivity;
 import uts.uajy.kelompok_b_jualonline.R;
 import uts.uajy.kelompok_b_jualonline.SplashScreen;
 import uts.uajy.kelompok_b_jualonline.persistencedata.sharedpref;
@@ -24,13 +26,14 @@ import uts.uajy.kelompok_b_jualonline.persistencedata.sharedpref;
 public class SettingsFragment extends Fragment {
     public SwitchMaterial themeSwitch;
     public Boolean checkSwitch;
+    public MaterialButton btnAboutUs;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final Context context = getActivity().getApplicationContext();
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 //        sharedpref = ((MainActivity)getActivity()).getSharedpref();
         themeSwitch = view.findViewById(R.id.themeSwitch);
-
+        btnAboutUs = view.findViewById(R.id.btnAboutUs);
         load();
 
         themeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -38,18 +41,24 @@ public class SettingsFragment extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b == true) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    getActivity().setTheme(R.style.darktheme);
+                    getContext().setTheme(R.style.darktheme);
                 }
                 else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    getActivity().setTheme(R.style.darktheme);
+                    getContext().setTheme(R.style.darktheme);
                 }
                 //save the state
 //                sharedpref.setNightModeState(themeSwitch.isChecked());
                 save();
             }
         });
-
+        btnAboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), MapActivity.class);
+                startActivity(i);
+            }
+        });
         return view;
     }
 
@@ -57,13 +66,13 @@ public class SettingsFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("filename",Context.MODE_PRIVATE);
         checkSwitch = sharedPreferences.getBoolean("NightMode",false);
         if (checkSwitch) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            getActivity().setTheme(R.style.darktheme);
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            getContext().setTheme(R.style.darktheme);
             themeSwitch.setChecked(true);
         }
         else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            getActivity().setTheme(R.style.AppTheme);
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            getContext().setTheme(R.style.AppTheme);
             themeSwitch.setChecked(false);
         }
     }

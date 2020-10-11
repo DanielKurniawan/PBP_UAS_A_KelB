@@ -1,7 +1,6 @@
-package uts.uajy.kelompok_b_jualonline;
+package uts.uajy.kelompok_b_jualonline.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +14,9 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
+import uts.uajy.kelompok_b_jualonline.R;
 import uts.uajy.kelompok_b_jualonline.databinding.AdapterRecyclerViewBarangBinding;
 import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
 
@@ -25,13 +24,13 @@ public class BarangRecyclerViewAdapter extends RecyclerView.Adapter<BarangRecycl
     private Context context;
 
     //dataset Barang
-    private ArrayList<Barang> listBarang;
-    private ArrayList<Barang> cart;
+    private List<Barang> listBarang;
+    private List<Barang> cart;
 
     public AdapterRecyclerViewBarangBinding binding;
     public BarangRecyclerViewAdapter(){}
 
-    public BarangRecyclerViewAdapter(Context context, ArrayList<Barang> result){
+    public BarangRecyclerViewAdapter(Context context, List<Barang> result){
         this.context = context;
         this.listBarang = result;
         cart = new ArrayList<Barang>();
@@ -41,7 +40,6 @@ public class BarangRecyclerViewAdapter extends RecyclerView.Adapter<BarangRecycl
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = AdapterRecyclerViewBarangBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
-
         final MyViewHolder holder = new MyViewHolder(binding);
         return holder;
     }
@@ -69,7 +67,7 @@ public class BarangRecyclerViewAdapter extends RecyclerView.Adapter<BarangRecycl
         return listBarang.size();
     }
 
-    public ArrayList<Barang> returnCart() {
+    public List<Barang> returnCart() {
         return cart;
     }
 

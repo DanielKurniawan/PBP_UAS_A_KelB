@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.core.app.NotificationCompat;
 
@@ -41,48 +42,38 @@ import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
 import uts.uajy.kelompok_b_jualonline.persistencedata.sharedpref;
 
 public class MainActivity extends AppCompatActivity{
-    public ArrayList<Barang> listCart;
+    public List<Barang> listCart;
 
-    public Home_Fragment homeFragment;
-    public Cart_Fragment cartFragment;
-    public Chat_Fragment chatFragment;
-    public User_Fragment userFragment;
+    Fragment home_fragment  = new Home_Fragment();
+    Fragment cart_fragment = new Cart_Fragment();
+    Fragment chat_fragment = new Chat_Fragment();
+    Fragment user_fragment = new User_Fragment();
     public sharedpref sharedpref;
     public Bundle mBundle;
     public Boolean checkTheme;
-
-    private String CHANNEL_ID="Channel 1";
-    Button signout;
-    FirebaseAuth mFirebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        sharedpref = new sharedpref(MainActivity.this);
         SharedPreferences sharedPreferences = getSharedPreferences("filename", Context.MODE_PRIVATE);
         checkTheme = sharedPreferences.getBoolean("NightMode",false);
         if(checkTheme) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             this.setTheme(R.style.darktheme);
 
         }
         else{
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             this.setTheme(R.style.AppTheme);
         }
+        super.onCreate(savedInstanceState);
+//        sharedpref = new sharedpref(MainActivity.this);
         setContentView(R.layout.activity_main);
         Toast.makeText(getApplicationContext(),"MAIN",Toast.LENGTH_SHORT).show();
-        homeFragment = new Home_Fragment();
-        cartFragment = new Cart_Fragment();
-        chatFragment = new Chat_Fragment();
-        userFragment = new User_Fragment();
         listCart = new ArrayList<Barang>();
 
         BottomNavigationView botNav = findViewById(R.id.bottomNavigationView);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment,homeFragment)
+                .replace(R.id.fragment,home_fragment)
                 .commit();
 
         //set default pagenya
@@ -95,11 +86,15 @@ public class MainActivity extends AppCompatActivity{
         botNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                //create fragment without recreating previous fragment
+//                FragmentTransaction transaction = fragmentManager.beginTransaction();
+//                transaction.hide(User_Fragment.this);
+//                transaction.addToBackStack(null);
+//                transaction.replace(R.id.fragment,settingsFragment);
+//                transaction.commit()
                 Fragment fragment = null;
-                Fragment home_fragment  = new Home_Fragment();
-                Fragment cart_fragment = new Cart_Fragment();
-                Fragment chat_fragment = new Chat_Fragment();
-                Fragment user_fragment = new User_Fragment();
+
                 switch (item.getItemId()) {
                     case R.id.Fragment_Home :
                         loadFragment(home_fragment);
@@ -139,33 +134,5 @@ public class MainActivity extends AppCompatActivity{
 
     public sharedpref getSharedpref (){
         return sharedpref;
-    }
-
-    private void createNotificationChannel(){
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("Goodbye")
-                .setContentText("Comeback Again...")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        Intent notifcationIntent= new Intent(this,MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0, notifcationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(contentIntent);
-
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(0,builder.build());
-    }
-    private void addNotification(){
-        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
-            CharSequence name = "Channel 1";
-            String description = "This is Channel 1";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,name,importance);
-            channel.setDescription(description);
-
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PenjualanOnline</string>
+    <string name="app_name">Penjualan Online</string>
 
     <string name="hintEmail">EMAIL</string>
     <string name="hintPassword">PASSWORD</string>
@@ -36,4 +36,16 @@
     <string name="list_cart">List Cart</string>
     <string name="settings">Settings</string>
     <string name="dark_mode">Enable Dark Mode</string>
+    <string name="update_profile">Update Profile Picture</string>
+    <string name="username">Username :</string>
+    <string name="alamat">Alamat :</string>
+    <string name="phone_number">Phone Number :</string>
+    <string name="email">Email :</string>
+    <string name="nama">Nama :</string>
+
+    <!-- mapbox -->
+    <string name="mapbox_access_token">pk.eyJ1IjoidHViZXNwYnBiIiwiYSI6ImNrZzRsamJvNTA4bWYyc3BpbXBwdXZ4MTYifQ.19TDIUtyo8E7oklo14bNSg</string>
+    <string name="our_headquarter">Our Headquarter</string>
+    <string name="full_address">Full Address</string>
+    <string name="contact_us">Contact Us</string>
 </resources>

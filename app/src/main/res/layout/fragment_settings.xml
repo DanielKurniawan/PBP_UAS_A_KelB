@@ -8,7 +8,7 @@
     android:background="?attr/backgroundcolor"
     tools:context=".Fragment.SettingsFragment">
     <RelativeLayout
-        android:id="@+id/relative_layout"
+        android:id="@+id/relative_layoutTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -27,9 +27,10 @@
             app:layout_constraintTop_toTopOf="parent" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/relative_layoutPersonalization"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/relative_layout"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relative_layoutTitle"
         android:gravity="top">
         <LinearLayout
             android:id="@+id/linlayNama"
@@ -54,5 +55,20 @@
                 android:textColor="?attr/textcolor"
                 android:text="@string/dark_mode"/>
         </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relative_layoutAboutUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relative_layoutPersonalization"
+        android:layout_margin="@dimen/margin_20"
+        android:gravity="top">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAboutUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About Us"
+            android:layout_centerHorizontal="true"
+            app:itemTextColor="?attr/iconcolor"/>
     </RelativeLayout>
 </RelativeLayout>

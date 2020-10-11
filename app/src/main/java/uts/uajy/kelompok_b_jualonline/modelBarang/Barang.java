@@ -3,22 +3,40 @@ package uts.uajy.kelompok_b_jualonline.modelBarang;
 import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.bumptech.glide.Glide;
 
-public class Barang {
+import java.io.Serializable;
+
+@Entity
+public class Barang implements Serializable {
+    @PrimaryKey(autoGenerate = true)
     public int id;
+
+    @ColumnInfo(name = "namaBarang")
     public String namaBarang;
+
+    @ColumnInfo(name = "deskripsi")
     public String deskripsi;
+
+    @ColumnInfo(name = "harga")
     public int harga;
+
+    @ColumnInfo(name = "imgUrl")
     public String imgUrl;
 
-    public Barang(int id, String namaBarang, String deskripsi, int harga, String imgUrl) {
-        this.id = id;
+    public Barang(String namaBarang, String deskripsi, int harga, String imgUrl) {
         this.namaBarang = namaBarang;
         this.deskripsi = deskripsi;
         this.harga = harga;
         this.imgUrl = imgUrl;
+    }
+
+    public Barang() {
+
     }
 
     public int getId() {
