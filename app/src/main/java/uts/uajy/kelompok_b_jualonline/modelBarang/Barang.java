@@ -25,6 +25,9 @@ public class Barang implements Serializable {
     @ColumnInfo(name = "harga")
     public int harga;
 
+    @ColumnInfo(name = "status")
+    public String status;
+
     @ColumnInfo(name = "imgUrl")
     public String imgUrl;
 
@@ -32,6 +35,7 @@ public class Barang implements Serializable {
         this.namaBarang = namaBarang;
         this.deskripsi = deskripsi;
         this.harga = harga;
+        this.status = "belum";
         this.imgUrl = imgUrl;
     }
 
@@ -69,6 +73,14 @@ public class Barang implements Serializable {
 
     public void setHarga(int harga) {
         this.harga = harga;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getImgUrl() {

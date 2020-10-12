@@ -13,14 +13,14 @@ import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
 @Dao
 public interface BarangDAO {
 
-    @Query("SELECT * FROM barang")
-    List<Barang> getAll();
+    @Query("SELECT * FROM barang WHERE status =:status")
+    List<Barang> getAll(String status);
 
     @Insert
     void insert(Barang barang);
 
-    @Update
-    void update(Barang barang);
+    @Query("UPDATE barang SET status= :status where id= :id")
+    void update(String status, int id);
 
     @Delete
     void delete(Barang barang);

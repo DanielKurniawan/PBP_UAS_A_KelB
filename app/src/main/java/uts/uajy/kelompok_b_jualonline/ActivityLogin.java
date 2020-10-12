@@ -2,6 +2,7 @@ package uts.uajy.kelompok_b_jualonline;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -10,6 +11,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -31,10 +33,22 @@ public class ActivityLogin extends AppCompatActivity {
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private String CHANNEL_ID = "Channel 1";
+    private Boolean checkTheme;
 
-
+    SharedPreferences sharedPEmail;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPreferences = getSharedPreferences("filename", Context.MODE_PRIVATE);
+        checkTheme = sharedPreferences.getBoolean("NightMode",false);
+        if(checkTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            this.setTheme(R.style.darktheme);
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            this.setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         email = findViewById(R.id.email);
@@ -43,14 +57,24 @@ public class ActivityLogin extends AppCompatActivity {
         signin = findViewById(R.id.signin);
         signup = findViewById(R.id.signup);
 
+        if(mFirebaseAuth.getCurrentUser() != null) {
+
+           save(mFirebaseAuth.getCurrentUser());
+
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }
+
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(mFirebaseUser != null){
                     Toast.makeText(ActivityLogin.this,"Login Successfull",Toast.LENGTH_SHORT).show();
+                    save(mFirebaseUser);
                     Intent i = new Intent (ActivityLogin.this, MainActivity.class);
                     startActivity(i);
+                    finish();
                 }else{
                     Toast.makeText(ActivityLogin.this,"Please Login",Toast.LENGTH_SHORT).show();
                 }
@@ -111,6 +135,7 @@ public class ActivityLogin extends AppCompatActivity {
                                 addNotification();
                                 Intent i = new Intent(ActivityLogin.this,MainActivity.class);
                                 startActivity(i);
+                                finish();
                             }
                         }
                     });
@@ -119,6 +144,14 @@ public class ActivityLogin extends AppCompatActivity {
         });
     }
 
+
+    public void save(FirebaseUser mFirebaseAuth){
+        String helo = mFirebaseAuth.getEmail();
+        sharedPEmail = getSharedPreferences("userEmail",Context.MODE_PRIVATE);
+        editor = sharedPEmail.edit();
+        editor.putString("email",helo);
+        editor.apply();
+    }
 
     private boolean isValidEmailId(String email){
 

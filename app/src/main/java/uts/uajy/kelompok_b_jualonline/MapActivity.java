@@ -157,13 +157,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         enableLocationComponent(style);
 
                         initLayers(style);
-                        double longitude = 110.364917;
-                        double latitude = -7.8011945;
+                        double longitude = 110.414208;
+                        double latitude = -7.779944;
                         if (destination!=null) {
                             mapboxMap.removeMarker(destinationMarker);
                         }
                         LatLng officePoint = new LatLng(latitude,longitude);
-                        Toast.makeText(MapActivity.this, String.valueOf(officePoint.getLongitude()),Toast.LENGTH_SHORT).show();
                         destination = Point.fromLngLat(officePoint.getLongitude(), officePoint.getLatitude());
                         destinationMarker = mapboxMap.addMarker(new MarkerOptions().position(new LatLng(officePoint)));
                         mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(

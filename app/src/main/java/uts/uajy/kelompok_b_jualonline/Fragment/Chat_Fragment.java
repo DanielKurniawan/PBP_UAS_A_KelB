@@ -1,24 +1,38 @@
 package uts.uajy.kelompok_b_jualonline.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.List;
 
 import uts.uajy.kelompok_b_jualonline.MainActivity;
 import uts.uajy.kelompok_b_jualonline.R;
+import uts.uajy.kelompok_b_jualonline.adapter.HistoryRecyclerViewAdapter;
+import uts.uajy.kelompok_b_jualonline.database.DatabaseClient;
+import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
 import uts.uajy.kelompok_b_jualonline.persistencedata.sharedpref;
 
 public class Chat_Fragment extends Fragment {
 
     sharedpref sharedpref;
     Boolean checkTheme;
+
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager mLayoutManager;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        sharedpref = ((MainActivity)getActivity()).getSharedpref();
@@ -40,6 +54,36 @@ public class Chat_Fragment extends Fragment {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             getContext().setTheme(R.style.AppTheme);
         }
+        getBarang(view);
         return view;
+    }
+    public void getBarang(final View view){
+        class GetUsers extends AsyncTask<Void, Void, List<Barang>> {
+            public HistoryRecyclerViewAdapter adapter;
+            @Override
+            protected List<Barang> doInBackground(Void... voids) {
+                List<Barang> historyList = DatabaseClient
+                        .getInstance(view.getContext())
+                        .getDatabase()
+                        .barangDAO()
+                        .getAll("sudah");
+                return historyList;
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            protected void onPostExecute(List<Barang> history) {
+                super.onPostExecute(history);
+
+                recyclerView = view.findViewById(R.id.history_rv);
+                mLayoutManager = new LinearLayoutManager(view.getContext());
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                adapter = new HistoryRecyclerViewAdapter(view.getContext(), history);
+                recyclerView.setAdapter(adapter);
+            }
+        }
+        GetUsers get = new GetUsers();
+        get.execute();
     }
 }

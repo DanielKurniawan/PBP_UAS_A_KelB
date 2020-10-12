@@ -30,21 +30,15 @@
             android:layout_marginBottom="@dimen/margin_16"
             android:layout_below="@id/profile_picture"
             android:layout_centerHorizontal="true"
-            android:text="User Profile"
+            android:text="@string/user"
+            android:textStyle="bold"
             android:textColor="#FFFFFF"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnUpdateProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Profile"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/margin_17"
-            android:text="@string/update_profile"
-            android:backgroundTint="?attr/colorAccent"/>
+
     </RelativeLayout>
 
     <ScrollView
@@ -57,29 +51,7 @@
             android:layout_below="@id/relative_layout"
             android:background="?attr/backgroundcolor"
             android:gravity="top">
-            <LinearLayout
-                android:id="@+id/linlayNama"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
-                android:gravity="start">
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nama"
-                    android:textColor="?attr/textcolor"
-                    style="@style/TextAppearance.MaterialComponents.Body1"/>
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txtNama"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="?attr/textcolor"
-                    android:text=""
-                    style="@style/TextAppearance.MaterialComponents.Body1"/>
-            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/linlayEmail"
                 android:layout_width="match_parent"
@@ -88,8 +60,7 @@
                 android:gravity="start"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_below="@id/linlayNama">
+                android:layout_marginTop="20dp">
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -104,8 +75,9 @@
                     android:textColor="?attr/textcolor"
                     style="@style/TextAppearance.MaterialComponents.Body1"/>
             </LinearLayout>
+
             <LinearLayout
-                android:id="@+id/linlayPhoneNumber"
+                android:id="@+id/linlayButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -114,79 +86,38 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_below="@id/linlayEmail">
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/phone_number"
-                    android:textColor="?attr/textcolor"
-                    style="@style/TextAppearance.MaterialComponents.Body1"/>
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txtPhoneNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="?attr/textcolor"
-                    style="@style/TextAppearance.MaterialComponents.Body1"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/linlayAlamat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="start"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_below="@id/linlayPhoneNumber">
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/alamat"
-                    android:textColor="?attr/textcolor"
-                    style="@style/TextAppearance.MaterialComponents.Body1"/>
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txtAlamat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="?attr/textcolor"
-                    style="@style/TextAppearance.MaterialComponents.Body1"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/linlayUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="start"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_below="@id/linlayAlamat">
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/username"
-                    android:textColor="?attr/textcolor"
-                    style="@style/TextAppearance.MaterialComponents.Body1"/>
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txtUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="?attr/textcolor"
-                    style="@style/TextAppearance.MaterialComponents.Body1"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/linlayUsername"
-                android:layout_marginTop="@dimen/margin_20"
-                android:layout_marginBottom="@dimen/margin_20"
-                android:layout_centerHorizontal="true">
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnUpdateProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Logout"/>
+                    android:layout_below="@id/Profile"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_17"
+                    android:text="About Developer"
+                    android:backgroundTint="?attr/colorAccent"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linlayButtonSignup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="start"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/linlayButton">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_signout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Profile"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_17"
+                    android:text="Sign Out"
+                    android:backgroundTint="#ED2B2A"
+                    android:layout_gravity="center"/>
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

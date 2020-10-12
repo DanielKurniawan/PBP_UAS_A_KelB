@@ -23,8 +23,6 @@ public class SplashScreen extends AppCompatActivity {
     public sharedpref sharedpref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.splashscreenlogo);
         SharedPreferences sharedPreferences = getSharedPreferences("filename", Context.MODE_PRIVATE);
         checkTheme = sharedPreferences.getBoolean("NightMode",false);
         if(checkTheme) {
@@ -35,6 +33,8 @@ public class SplashScreen extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             this.setTheme(R.style.AppTheme);
         }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.splashscreenlogo);
 //        themeCheck = ((MainActivity)getApplicationContext()).getSharedpref().loadNightModeState();
 //        if(themeCheck) {
 //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

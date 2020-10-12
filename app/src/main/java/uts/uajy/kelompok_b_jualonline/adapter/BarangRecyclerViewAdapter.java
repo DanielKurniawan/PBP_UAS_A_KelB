@@ -56,7 +56,6 @@ public class BarangRecyclerViewAdapter extends RecyclerView.Adapter<BarangRecycl
             public void onClick(View view) {
                 holder.cardView.setChecked(!holder.cardView.isChecked());
                 addorremoveTitle(view, holder, b);
-                Toast.makeText(view.getContext(),"Added to cart",Toast.LENGTH_SHORT).show();
             }
         });
     }

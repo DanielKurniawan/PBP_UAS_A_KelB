@@ -15,9 +15,9 @@
 
     <item
         android:id="@+id/Fragment_Chat"
-        android:icon="@drawable/ic_baseline_chat_24"
+        android:icon="@drawable/ic_baseline_history_24"
         android:textColor="?attr/textcolor"
-        android:title="@string/Chat" />
+        android:title="@string/history" />
 
     <item
         android:id="@+id/Fragment_User"

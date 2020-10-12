@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.widget.Space;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import uts.uajy.kelompok_b_jualonline.Fragment.Cart_Fragment;
 import uts.uajy.kelompok_b_jualonline.Fragment.Chat_Fragment;
@@ -65,9 +68,32 @@ public class MainActivity extends AppCompatActivity{
             this.setTheme(R.style.AppTheme);
         }
         super.onCreate(savedInstanceState);
-//        sharedpref = new sharedpref(MainActivity.this);
         setContentView(R.layout.activity_main);
-        Toast.makeText(getApplicationContext(),"MAIN",Toast.LENGTH_SHORT).show();
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.BASE) {
+            String CHANNEL_ID = "Channel 1";
+            CharSequence name = "Channel 1";
+            String description  = "This is Channel 1";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("news")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task)  {
+                        String mag = "Successful";
+                        if(!task.isSuccessful()){
+                            mag="Failed";
+                        }
+                        Toast.makeText(MainActivity.this, mag, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
         listCart = new ArrayList<Barang>();
 
         BottomNavigationView botNav = findViewById(R.id.bottomNavigationView);

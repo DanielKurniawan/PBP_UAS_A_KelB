@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashScreen"
-    android:background="#FFFFFF">
+    android:background="?attr/backgroundcolor">
     <ImageView
         android:id="@+id/splash_logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_baseline_home_24"
-        android:layout_margin="30dp"
+        android:src="@drawable/ic_cart"
+        android:layout_margin="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

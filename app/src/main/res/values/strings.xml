@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Penjualan Online</string>
+    <string name="app_name">PBP Mart</string>
 
     <string name="hintEmail">EMAIL</string>
     <string name="hintPassword">PASSWORD</string>
@@ -48,4 +48,8 @@
     <string name="our_headquarter">Our Headquarter</string>
     <string name="full_address">Full Address</string>
     <string name="contact_us">Contact Us</string>
+    <string name="history_pembelian">History Pembelian</string>
+    <string name="bmart">BMart</string>
+    <string name="history">History</string>
+    <string name="user">User</string>
 </resources>
