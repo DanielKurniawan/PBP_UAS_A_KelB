@@ -35,14 +35,8 @@ public class Chat_Fragment extends Fragment {
     RecyclerView.LayoutManager mLayoutManager;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        sharedpref = ((MainActivity)getActivity()).getSharedpref();
+
         View view = inflater.inflate(R.layout.fragment_chat_, container, false);
-//        if(sharedpref.loadNightModeState()==true) {
-//            getActivity().setTheme(R.style.darktheme);
-//        }
-//        else{
-//            getActivity().setTheme(R.style.darktheme);
-//        }
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("filename", Context.MODE_PRIVATE);
         checkTheme = sharedPreferences.getBoolean("NightMode",false);
         if(checkTheme) {

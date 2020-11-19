@@ -95,22 +95,6 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
                 super.onPostExecute(aVoid);
                 //summon the toasty bread hehe
                 Toast.makeText(view.getContext().getApplicationContext(), "Barang deleted, swipe to refresh", Toast.LENGTH_SHORT).show();
-
-                //refresh the subtotal yea boi
-//                int subtotal=0;
-//                outputSubTotal = view.findViewById(R.id.txt_harga);
-//                for(int i=0;i<cart.size();i++)
-//                {
-//                    subtotal=subtotal+cart.get(i).getHarga();
-//                }
-//                if (cart.isEmpty()){
-//                    outputSubTotal.setText("Rp 0");
-//                    Toast.makeText(view.getContext(), "Empty List", Toast.LENGTH_SHORT).show();
-//                }
-//                else
-//                {
-//                    outputSubTotal.setText("Rp "+String.valueOf(subtotal));
-//                }
             }
         }
 

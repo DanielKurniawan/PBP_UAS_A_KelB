@@ -20,7 +20,6 @@ import uts.uajy.kelompok_b_jualonline.util.MessagingService;
 public class SplashScreen extends AppCompatActivity {
     private static int SPLASH_DURATION = 3000;
     public Boolean checkTheme;
-    public sharedpref sharedpref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sharedPreferences = getSharedPreferences("filename", Context.MODE_PRIVATE);
@@ -35,15 +34,7 @@ public class SplashScreen extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreenlogo);
-//        themeCheck = ((MainActivity)getApplicationContext()).getSharedpref().loadNightModeState();
-//        if(themeCheck) {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//            setTheme(R.style.darktheme);
-//        }
-//        else{
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//            setTheme(R.style.AppTheme);
-//        }
+
         Animation splashAnim = AnimationUtils.loadAnimation(this, R.anim.animasi);
         ImageView img = findViewById(R.id.splash_logo);
         img.setAnimation(splashAnim);
@@ -62,8 +53,4 @@ public class SplashScreen extends AppCompatActivity {
 
 
     }
-    public sharedpref getSharedpref (){
-        return sharedpref;
-    }
-
 }

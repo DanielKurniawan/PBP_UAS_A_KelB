@@ -52,4 +52,5 @@
     <string name="bmart">BMart</string>
     <string name="history">History</string>
     <string name="user">User</string>
+    <string name="image_cart">Image Cart</string>
 </resources>

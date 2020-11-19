@@ -102,12 +102,6 @@ public class MainActivity extends AppCompatActivity{
                 .replace(R.id.fragment,home_fragment)
                 .commit();
 
-        //set default pagenya
-//        botNav.setSelectedItemId(R.id.Fragment_Home);
-
-//        NavController navController = Navigation.findNavController(this,  R.id.fragment);
-//        NavigationUI.setupWithNavController(botNav, navController);
-
 
         botNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

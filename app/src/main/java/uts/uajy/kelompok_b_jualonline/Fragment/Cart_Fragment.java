@@ -175,11 +175,6 @@ public class Cart_Fragment extends Fragment {
         delete.execute();
     }
 
-    public void resetAllDatabase(){
-        for(int i=0;i<15;i++) {
-
-        }
-    }
 
     private void update(final View view){
         class UpdateUser extends AsyncTask<Void, Void, Void> {

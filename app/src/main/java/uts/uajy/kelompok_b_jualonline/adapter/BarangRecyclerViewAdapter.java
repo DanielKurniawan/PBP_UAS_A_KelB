@@ -50,7 +50,6 @@ public class BarangRecyclerViewAdapter extends RecyclerView.Adapter<BarangRecycl
         final Barang b = listBarang.get(position);
         binding.setBarang(b);
         final int pos = position;
-//        Toast.makeText(context,b.getNamaBarang(),Toast.LENGTH_SHORT).show();
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,12 +81,9 @@ public class BarangRecyclerViewAdapter extends RecyclerView.Adapter<BarangRecycl
             //hapus
             cart.remove(b);
         }
-//        Toast.makeText(v.getContext(),b.getNamaBarang(),Toast.LENGTH_SHORT).show();
-
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        //        private final AdapterRecyclerViewBarangBinding binding;
         private MaterialCardView cardView;
         private MaterialTextView nama,deskripsi,harga;
         private ImageView imageView;

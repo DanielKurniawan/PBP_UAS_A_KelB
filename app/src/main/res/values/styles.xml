@@ -11,7 +11,7 @@
         <item name="textcolordefault">#ffffff</item>
         <item name="tintcolor">#ffffff</item>
         <item name="buttoncolor">#2196f3</item>
-        <item name="iconcolor">@color/colorPrimary</item>
+        <item name="iconcolor">@color/blue</item>
     </style>
 
     <style name="darktheme" parent="Theme.MaterialComponents.Light.NoActionBar">

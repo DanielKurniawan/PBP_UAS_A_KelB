@@ -52,24 +52,17 @@ public class User_Fragment extends Fragment {
 
     private String CHANNEL_ID = "Channel 1" ;
 
-    // camera
-//    private Camera mCamera = null;
-//    private CameraView mCameraView = null;
-
 
     Boolean checkTheme;
-    //    sharedpref sharedpref;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_, container, false);
-
-//        sharedpref = ((MainActivity)getActivity()).getSharedpref();
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("filename", Context.MODE_PRIVATE);
         checkTheme = sharedPreferences.getBoolean("NightMode",false);
         if(checkTheme) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             getContext().setTheme(R.style.darktheme);
-
         }
         else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

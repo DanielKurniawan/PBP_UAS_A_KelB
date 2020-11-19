@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,6 @@ import uts.uajy.kelompok_b_jualonline.R;
 import uts.uajy.kelompok_b_jualonline.database.DatabaseClient;
 import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
 import uts.uajy.kelompok_b_jualonline.modelBarang.DataBarang;
-import uts.uajy.kelompok_b_jualonline.persistencedata.sharedpref;
 
 public class Home_Fragment extends Fragment {
     List<Barang> listBarang, listCart;
@@ -35,18 +34,10 @@ public class Home_Fragment extends Fragment {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     ExtendedFloatingActionButton addtocart;
-    sharedpref sharedpref;
     Boolean checkTheme;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_, container, false);
-//        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-//            getActivity().setTheme(R.style.darktheme);
-//        }
-//        else {
-//            getActivity().setTheme(R.style.AppTheme);
-//        }
-//        sharedpref = ((MainActivity)getActivity()).getSharedpref();
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("filename", Context.MODE_PRIVATE);
         checkTheme = sharedPreferences.getBoolean("NightMode",false);
@@ -66,7 +57,7 @@ public class Home_Fragment extends Fragment {
         adapter = new BarangRecyclerViewAdapter(getContext(),listBarang);
         recyclerView = view.findViewById(R.id.recyclerview_Barang);
         mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
@@ -101,12 +92,6 @@ public class Home_Fragment extends Fragment {
             @Override
             protected Void doInBackground(Void... voids)  {
                 for (int i=0;i<listCart.size();i++) {
-//                    Barang barang = new Barang();
-//                    barang.setNamaBarang(listCart.get(i).getNamaBarang());
-//                    barang.setDeskripsi(listCart.get(i).getDeskripsi());
-//                    barang.setHarga(listCart.get(i).getHarga());
-//                    barang.setImgUrl(listCart.get(i).getImgUrl());
-
                     Barang barang = listCart.get(i);
                     DatabaseClient.getInstance(getContext()).getDatabase()
                             .barangDAO()
@@ -118,7 +103,6 @@ public class Home_Fragment extends Fragment {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-//                Toast.makeText(getContext(), "User saved", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -144,8 +128,6 @@ public class Home_Fragment extends Fragment {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 Toast.makeText(getContext(), "Barang deleted", Toast.LENGTH_SHORT).show();
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.hide(UpdateFragment.this).commit();
             }
         }
 

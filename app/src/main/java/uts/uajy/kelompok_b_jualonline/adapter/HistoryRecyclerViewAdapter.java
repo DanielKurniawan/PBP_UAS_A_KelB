@@ -59,10 +59,6 @@ public class HistoryRecyclerViewAdapter extends RecyclerView.Adapter<HistoryRecy
         public MyViewHolder(@NonNull AdapterRecyclerViewHistoryBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-//            nama = itemView.findViewById(R.id.namaBarangText);
-//            deskripsi = itemView.findViewById(R.id.deskripsiText);
-//            harga = itemView.findViewById(R.id.hargaText);
-//            imageView = itemView.findViewById(R.id.imageBarang);
             cardView = itemView.findViewById(R.id.historyCardView);
         }
 

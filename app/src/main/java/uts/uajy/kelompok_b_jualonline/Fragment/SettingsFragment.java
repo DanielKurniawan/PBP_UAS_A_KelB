@@ -86,12 +86,10 @@ public class SettingsFragment extends Fragment implements SensorEventListener {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("filename",Context.MODE_PRIVATE);
         checkSwitch = sharedPreferences.getBoolean("NightMode",false);
         if (checkSwitch) {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             getContext().setTheme(R.style.darktheme);
             themeSwitch.setChecked(true);
         }
         else {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             getContext().setTheme(R.style.AppTheme);
             themeSwitch.setChecked(false);
         }
@@ -124,11 +122,9 @@ public class SettingsFragment extends Fragment implements SensorEventListener {
                 if(speed>SHAKE_THRESHOLD) {
                     if (check!=null) {
                         if (check == true) {
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                             getContext().setTheme(R.style.darktheme);
                         }
                         else {
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                             getContext().setTheme(R.style.darktheme);
                         }
                         Toast.makeText(view.getContext(), "SHAKE", Toast.LENGTH_SHORT).show();

@@ -342,7 +342,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             locationComponent.setRenderMode(RenderMode.COMPASS);
             this.origin = Point.fromLngLat(locationComponent.getLastKnownLocation().getLongitude(),
                     locationComponent.getLastKnownLocation().getLatitude());
-//            Toast.makeText(MapActivity.this, (int) locationComponent.getLastKnownLocation().getLongitude(),Toast.LENGTH_SHORT).show();
+            Log.d("ERRORNYA DISINI", "enableLocationComponent: EROR DISINNI WE");
         }
         else {
             permissionsManager = new PermissionsManager(this);
