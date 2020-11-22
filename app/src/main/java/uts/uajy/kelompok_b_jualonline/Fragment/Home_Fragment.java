@@ -130,7 +130,6 @@ public class Home_Fragment extends Fragment {
                 Toast.makeText(getContext(), "Barang deleted", Toast.LENGTH_SHORT).show();
             }
         }
-
         DeleteUser delete = new DeleteUser();
         delete.execute();
     }

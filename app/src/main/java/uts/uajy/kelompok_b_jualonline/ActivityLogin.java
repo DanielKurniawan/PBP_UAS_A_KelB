@@ -83,31 +83,33 @@ public class ActivityLogin extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(email.getText().toString().equalsIgnoreCase("")){
-                    Toast.makeText(getApplicationContext(),"Email Tidak boleh kosong",Toast.LENGTH_SHORT).show();
-                }else if(password.getText().toString().equalsIgnoreCase("")){
-                    Toast.makeText(getApplicationContext(),"Password tidak boleh kosong",Toast.LENGTH_SHORT).show();
-                }else if(!isValidEmailId(email.getText().toString().trim())){
-                    Toast.makeText(getApplicationContext(), "Email Tidak Valid", Toast.LENGTH_SHORT).show();
-                }else if(password.getText().toString().length()<6){
-                    Toast.makeText(getApplicationContext(), "Password Harus 6 Karakter", Toast.LENGTH_SHORT).show();
-                }else{
-//                    Toast.makeText(getApplicationContext(), "Sukses", Toast.LENGTH_SHORT).show();
-                    String input1 = email.getText().toString();
-                    String input2 = password.getText().toString();
-                    mFirebaseAuth.createUserWithEmailAndPassword(input1,input2).addOnCompleteListener(ActivityLogin.this, new OnCompleteListener<com.google.firebase.auth.AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<com.google.firebase.auth.AuthResult> task) {
-                            if(!task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "SignUp Unccessfull, Please Try Again", Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(getApplicationContext(), "SignUp Sucessfull", Toast.LENGTH_SHORT).show();
-                                email.setText("");
-                                password.setText("");
-                            }
-                        }
-                    });
-                }
+//                if(email.getText().toString().equalsIgnoreCase("")){
+//                    Toast.makeText(getApplicationContext(),"Email Tidak boleh kosong",Toast.LENGTH_SHORT).show();
+//                }else if(password.getText().toString().equalsIgnoreCase("")){
+//                    Toast.makeText(getApplicationContext(),"Password tidak boleh kosong",Toast.LENGTH_SHORT).show();
+//                }else if(!isValidEmailId(email.getText().toString().trim())){
+//                    Toast.makeText(getApplicationContext(), "Email Tidak Valid", Toast.LENGTH_SHORT).show();
+//                }else if(password.getText().toString().length()<6){
+//                    Toast.makeText(getApplicationContext(), "Password Harus 6 Karakter", Toast.LENGTH_SHORT).show();
+//                }else{
+////                    Toast.makeText(getApplicationContext(), "Sukses", Toast.LENGTH_SHORT).show();
+//                    String input1 = email.getText().toString();
+//                    String input2 = password.getText().toString();
+//                    mFirebaseAuth.createUserWithEmailAndPassword(input1,input2).addOnCompleteListener(ActivityLogin.this, new OnCompleteListener<com.google.firebase.auth.AuthResult>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<com.google.firebase.auth.AuthResult> task) {
+//                            if(!task.isSuccessful()) {
+//                                Toast.makeText(getApplicationContext(), "SignUp Unccessfull, Please Try Again", Toast.LENGTH_SHORT).show();
+//                            }else{
+//                                Toast.makeText(getApplicationContext(), "SignUp Sucessfull", Toast.LENGTH_SHORT).show();
+//                                email.setText("");
+//                                password.setText("");
+//                            }
+//                        }
+//                    });
+//                }
+                Intent i = new Intent(ActivityLogin.this, RegisterActivity.class);
+                startActivity(i);
             }
         });
 
