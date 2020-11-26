@@ -74,9 +74,9 @@ public class RegisterActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(response);
                     if(obj.getString("message").equals("Add User Success"))
                     {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(RegisterActivity.this,MainActivity.class);
+                        Intent i = new Intent(RegisterActivity.this,ActivityLogin.class);
                         startActivity(i);
+                        Toast.makeText(getApplicationContext(), "Adding User Success, Please Check Your Email", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 } catch (JSONException e) {
@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 //Disini bagian jika response jaringan terdapat ganguan/error
 
-                Toast.makeText(getApplicationContext(), "Hellow", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "On Error Response", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

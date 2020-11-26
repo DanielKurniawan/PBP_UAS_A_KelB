@@ -2,7 +2,6 @@ package uts.uajy.kelompok_b_jualonline.Fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -24,7 +23,6 @@ import java.util.List;
 
 import uts.uajy.kelompok_b_jualonline.adapter.BarangRecyclerViewAdapter;
 import uts.uajy.kelompok_b_jualonline.R;
-import uts.uajy.kelompok_b_jualonline.database.DatabaseClient;
 import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
 import uts.uajy.kelompok_b_jualonline.modelBarang.DataBarang;
 
@@ -72,7 +70,7 @@ public class Home_Fragment extends Fragment {
                 else {
                     Toast.makeText(view.getContext(),"Not Empty",Toast.LENGTH_SHORT).show();
                     listCart = adapter.returnCart();
-                    addUser(listCart);
+//                    addUser(listCart);
                     Toast.makeText(view.getContext(),"List Acquired",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -86,51 +84,51 @@ public class Home_Fragment extends Fragment {
         return listCart;
     }
 
-    private void addUser(final List<Barang> listCart){
-        class AddUser extends AsyncTask<Void, Void, Void> {
-
-            @Override
-            protected Void doInBackground(Void... voids)  {
-                for (int i=0;i<listCart.size();i++) {
-                    Barang barang = listCart.get(i);
-                    DatabaseClient.getInstance(getContext()).getDatabase()
-                            .barangDAO()
-                            .insert(barang);
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-            }
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-        }
-        AddUser add = new AddUser();
-        add.execute();
-    }
-
-    private void delete(final Barang barang){
-        class DeleteUser extends AsyncTask<Void, Void, Void> {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                DatabaseClient.getInstance(getContext()).getDatabase()
-                        .barangDAO()
-                        .delete(barang);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                Toast.makeText(getContext(), "Barang deleted", Toast.LENGTH_SHORT).show();
-            }
-        }
-        DeleteUser delete = new DeleteUser();
-        delete.execute();
-    }
+//    private void addUser(final List<Barang> listCart){
+//        class AddUser extends AsyncTask<Void, Void, Void> {
+//
+//            @Override
+//            protected Void doInBackground(Void... voids)  {
+//                for (int i=0;i<listCart.size();i++) {
+//                    Barang barang = listCart.get(i);
+//                    DatabaseClient.getInstance(getContext()).getDatabase()
+//                            .barangDAO()
+//                            .insert(barang);
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Void aVoid) {
+//                super.onPostExecute(aVoid);
+//            }
+//
+//            @Override
+//            protected void onPreExecute() {
+//                super.onPreExecute();
+//            }
+//        }
+//        AddUser add = new AddUser();
+//        add.execute();
+//    }
+//
+//    private void delete(final Barang barang){
+//        class DeleteUser extends AsyncTask<Void, Void, Void> {
+//            @Override
+//            protected Void doInBackground(Void... voids) {
+//                DatabaseClient.getInstance(getContext()).getDatabase()
+//                        .barangDAO()
+//                        .delete(barang);
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Void aVoid) {
+//                super.onPostExecute(aVoid);
+//                Toast.makeText(getContext(), "Barang deleted", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//        DeleteUser delete = new DeleteUser();
+//        delete.execute();
+//    }
 }

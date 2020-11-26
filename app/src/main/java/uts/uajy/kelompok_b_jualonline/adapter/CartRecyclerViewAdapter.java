@@ -2,7 +2,6 @@ package uts.uajy.kelompok_b_jualonline.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uts.uajy.kelompok_b_jualonline.R;
-import uts.uajy.kelompok_b_jualonline.database.DatabaseClient;
 import uts.uajy.kelompok_b_jualonline.databinding.AdapterRecyclerViewCartBinding;
 import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
 
@@ -63,7 +61,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                delete(b,view);
+//                                delete(b,view);
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -77,30 +75,30 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         });
     }
 
-    private void delete(final Barang barang, final View view){
-        class DeleteUser extends AsyncTask<Void, Void, Void> {
-            MaterialTextView outputSubTotal;
-            @Override
-            protected Void doInBackground(Void... voids) {
-
-                //delete dulu
-                DatabaseClient.getInstance(view.getContext().getApplicationContext()).getDatabase()
-                        .barangDAO()
-                        .delete(barang);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                //summon the toasty bread hehe
-                Toast.makeText(view.getContext().getApplicationContext(), "Barang deleted, swipe to refresh", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        DeleteUser delete = new DeleteUser();
-        delete.execute();
-    }
+//    private void delete(final Barang barang, final View view){
+//        class DeleteUser extends AsyncTask<Void, Void, Void> {
+//            MaterialTextView outputSubTotal;
+//            @Override
+//            protected Void doInBackground(Void... voids) {
+//
+//                //delete dulu
+//                DatabaseClient.getInstance(view.getContext().getApplicationContext()).getDatabase()
+//                        .barangDAO()
+//                        .delete(barang);
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Void aVoid) {
+//                super.onPostExecute(aVoid);
+//                //summon the toasty bread hehe
+//                Toast.makeText(view.getContext().getApplicationContext(), "Barang deleted, swipe to refresh", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//
+//        DeleteUser delete = new DeleteUser();
+//        delete.execute();
+//    }
 
 
 

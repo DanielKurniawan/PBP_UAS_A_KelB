@@ -16,8 +16,7 @@ public class DataBarang {
     }
 
     public static final Barang b1 = new Barang("Dettol Sabun Mandi 20ml","Dettol sabun mandi adalah sabun yang digunakan" +
-            "untuk mandi agar kuman-kuman yang ada bisa mati dan tidak menyebabkan bau badan yang menyengat",20000,"https://www.static-sr" +
-            "c.com/wcsstore/Indraprastha/images/catalog/full//757/dettol_dettol-cair-antiseptik--750-ml-_full02.jpg?output-format=webp");
+            "untuk mandi agar kuman-kuman yang ada bisa mati dan tidak menyebabkan bau badan yang menyengat",20000,"https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//757/dettol_dettol-cair-antiseptik--750-ml-_full02.jpg?output-format=webp");
     public static final Barang b2 = new Barang("Dettol Sabun Cuci Tangan 40ml","Dettol sabun cuci tangan adalah sabun yang digunakan" +
             "untuk mencuci agar kuman-kuman yang ada bisa mati dan tidak menyebabkan bau tangan yang menyengat",32000,"https://d27zlipt1pllog.cloudfront." +
             "net/pub/media/catalog/product/d/e/det0166.jpg");

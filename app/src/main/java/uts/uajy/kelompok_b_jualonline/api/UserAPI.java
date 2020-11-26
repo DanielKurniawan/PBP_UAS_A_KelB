@@ -15,8 +15,8 @@ public class UserAPI {
     public static final String URL_GET = ROOT_API + "user/";
 
     //    method PUT
-    public static final String URL_UPDATE = ROOT_API + "user/";
+    public static final String URL_UPDATE = ROOT_API + "user/update/";
 
     //    method DELETE by ID
-    public static final String URL_DELETE = ROOT_API + "user/";
+    public static final String URL_DELETE = ROOT_API + "user/delete/";
 }

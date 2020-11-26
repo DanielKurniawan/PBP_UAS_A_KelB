@@ -1,11 +1,8 @@
 package uts.uajy.kelompok_b_jualonline.Fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -23,18 +20,12 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
-import uts.uajy.kelompok_b_jualonline.ActivityLogin;
-import uts.uajy.kelompok_b_jualonline.MainActivity;
 import uts.uajy.kelompok_b_jualonline.R;
 import uts.uajy.kelompok_b_jualonline.adapter.CartRecyclerViewAdapter;
-import uts.uajy.kelompok_b_jualonline.database.DatabaseClient;
 import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
-import uts.uajy.kelompok_b_jualonline.persistencedata.sharedpref;
 
 
 public class Cart_Fragment extends Fragment {
@@ -76,7 +67,7 @@ public class Cart_Fragment extends Fragment {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getUsers(view);
+//                getUsers(view);
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -91,7 +82,7 @@ public class Cart_Fragment extends Fragment {
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                update(view);
+//                                update(view);
                                 Toast.makeText(getContext(), "Sudah terbeli, silahkan refresh", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -104,105 +95,105 @@ public class Cart_Fragment extends Fragment {
                         .show();
             }
         });
-        getUsers(view);
+//        getUsers(view);
         return view;
     }
 
-    public void getUsers(final View view){
-        class GetUsers extends AsyncTask<Void, Void, List<Barang>> {
-            public CartRecyclerViewAdapter adapter;
-            MaterialTextView outputSubTotal, totalHarga, ongkirtxt;
-            @Override
-            protected List<Barang> doInBackground(Void... voids) {
-                List<Barang> cartList = DatabaseClient
-                        .getInstance(view.getContext())
-                        .getDatabase()
-                        .barangDAO()
-                        .getAll("belum");
-                return cartList;
-            }
+//    public void getUsers(final View view){
+//        class GetUsers extends AsyncTask<Void, Void, List<Barang>> {
+//            public CartRecyclerViewAdapter adapter;
+//            MaterialTextView outputSubTotal, totalHarga, ongkirtxt;
+//            @Override
+//            protected List<Barang> doInBackground(Void... voids) {
+//                List<Barang> cartList = DatabaseClient
+//                        .getInstance(view.getContext())
+//                        .getDatabase()
+//                        .barangDAO()
+//                        .getAll("belum");
+//                return cartList;
+//            }
+//
+//            @SuppressLint("SetTextI18n")
+//            @Override
+//            protected void onPostExecute(List<Barang> cart) {
+//                super.onPostExecute(cart);
+//                adapter = new CartRecyclerViewAdapter(view.getContext(), cart);
+//                recyclerView.setAdapter(adapter);
+//                int subtotal=0, ongkir=20000;
+//                outputSubTotal = view.findViewById(R.id.txt_harga);
+//                totalHarga = view.findViewById(R.id.totalharga);
+//                ongkirtxt = view.findViewById(R.id.ongkir);
+//                for(int i=0;i<cart.size();i++)
+//                {
+//                    subtotal=subtotal+cart.get(i).getHarga();
+//                }
+//                if (cart.isEmpty()){
+//                    outputSubTotal.setText("Rp 0");
+//                    ongkirtxt.setText("Rp 0");
+//                    totalHarga.setText("Rp 0");
+//                    Toast.makeText(view.getContext(), "Empty List", Toast.LENGTH_SHORT).show();
+//                }
+//                else
+//                {
+//                    outputSubTotal.setText("Rp "+String.valueOf(subtotal));
+//                    ongkirtxt.setText("Rp 10000");
+//                    totalHarga.setText("Rp" + String.valueOf(subtotal+10000));
+//                }
+//            }
+//        }
+//        GetUsers get = new GetUsers();
+//        get.execute();
+//    }
 
-            @SuppressLint("SetTextI18n")
-            @Override
-            protected void onPostExecute(List<Barang> cart) {
-                super.onPostExecute(cart);
-                adapter = new CartRecyclerViewAdapter(view.getContext(), cart);
-                recyclerView.setAdapter(adapter);
-                int subtotal=0, ongkir=20000;
-                outputSubTotal = view.findViewById(R.id.txt_harga);
-                totalHarga = view.findViewById(R.id.totalharga);
-                ongkirtxt = view.findViewById(R.id.ongkir);
-                for(int i=0;i<cart.size();i++)
-                {
-                    subtotal=subtotal+cart.get(i).getHarga();
-                }
-                if (cart.isEmpty()){
-                    outputSubTotal.setText("Rp 0");
-                    ongkirtxt.setText("Rp 0");
-                    totalHarga.setText("Rp 0");
-                    Toast.makeText(view.getContext(), "Empty List", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    outputSubTotal.setText("Rp "+String.valueOf(subtotal));
-                    ongkirtxt.setText("Rp 10000");
-                    totalHarga.setText("Rp" + String.valueOf(subtotal+10000));
-                }
-            }
-        }
-        GetUsers get = new GetUsers();
-        get.execute();
-    }
-
-    private void delete(final Barang barang){
-        class DeleteUser extends AsyncTask<Void, Void, Void> {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                DatabaseClient.getInstance(getContext()).getDatabase()
-                        .barangDAO()
-                        .delete(barang);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                Toast.makeText(getContext(), "Barang deleted", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        DeleteUser delete = new DeleteUser();
-        delete.execute();
-    }
+//    private void delete(final Barang barang){
+//        class DeleteUser extends AsyncTask<Void, Void, Void> {
+//            @Override
+//            protected Void doInBackground(Void... voids) {
+//                DatabaseClient.getInstance(getContext()).getDatabase()
+//                        .barangDAO()
+//                        .delete(barang);
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Void aVoid) {
+//                super.onPostExecute(aVoid);
+//                Toast.makeText(getContext(), "Barang deleted", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//
+//        DeleteUser delete = new DeleteUser();
+//        delete.execute();
+//    }
 
 
-    private void update(final View view){
-        class UpdateUser extends AsyncTask<Void, Void, Void> {
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-
-                List<Barang> cartList = DatabaseClient
-                        .getInstance(view.getContext())
-                        .getDatabase()
-                        .barangDAO()
-                        .getAll("belum");
-                for(int i=0;i<cartList.size();i++) {
-                    DatabaseClient.getInstance(view.getContext()).getDatabase()
-                            .barangDAO()
-                            .update("sudah",cartList.get(i).getId());
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                Toast.makeText(getActivity().getApplicationContext(), "Status updated, please refresh to continue", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        UpdateUser update = new UpdateUser();
-        update.execute();
-    }
+//    private void update(final View view){
+//        class UpdateUser extends AsyncTask<Void, Void, Void> {
+//
+//            @Override
+//            protected Void doInBackground(Void... voids) {
+//
+//                List<Barang> cartList = DatabaseClient
+//                        .getInstance(view.getContext())
+//                        .getDatabase()
+//                        .barangDAO()
+//                        .getAll("belum");
+//                for(int i=0;i<cartList.size();i++) {
+//                    DatabaseClient.getInstance(view.getContext()).getDatabase()
+//                            .barangDAO()
+//                            .update("sudah",cartList.get(i).getId());
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Void aVoid) {
+//                super.onPostExecute(aVoid);
+//                Toast.makeText(getActivity().getApplicationContext(), "Status updated, please refresh to continue", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//
+//        UpdateUser update = new UpdateUser();
+//        update.execute();
+//    }
 }

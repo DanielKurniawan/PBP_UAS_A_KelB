@@ -38,11 +38,6 @@ public class Barang implements Serializable {
         this.status = "belum";
         this.imgUrl = imgUrl;
     }
-
-    public Barang() {
-
-    }
-
     public int getId() {
         return id;
     }
