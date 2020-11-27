@@ -1,28 +1,28 @@
 package uts.uajy.kelompok_b_jualonline.api;
 
 public class TransaksiAPI {
-//    Route::post('transaction','Api\TransaksiController@store'); // create
-//    Route::get('transaction','Api\TransaksiController@index'); //read all
-//    Route::get('transaction/{id}','Api\TransaksiController@show'); //read selected by id
-//    Route::post('transaction/update/{id}','Api\TransaksiController@update'); //update
-//    Route::post('transaction/delete/{id}','Api\TransaksiController@destroy'); //delete
 
     public static final String ROOT_URL   = "https://180709738.000webhostapp.com/";
     public static final String ROOT_API   = ROOT_URL+ "api/";
     public static final String URL_IMAGE  = ROOT_URL+"images/";
 
+    //    Route::post('transaction','Api\TransaksiController@store'); // create
     //    method POST create
-    public static final String URL_REGISTER = ROOT_API + "transaction";
+    public static final String URL_CREATE_TRANSACTION = ROOT_API + "transaction";
 
-    //    method GET by ID
-    public static final String URL_GET_ID = ROOT_API + "transaction/";
+    //    Route::get('transaction/{id}','Api\TransaksiController@show'); //read selected by id
+    //    method GET read selected by ID
+    public static final String URL_GET_TRANSACTION_ID = ROOT_API + "transaction/";
 
-    //    method GET all
-    public static final String URL_GET = ROOT_API + "transaction/";
+    //    Route::get('transaction','Api\TransaksiController@index'); //read all
+    //    method GET read all
+    public static final String URL_GET_TRANSACTION = ROOT_API + "transaction/";
 
-    //    method POST
-    public static final String URL_UPDATE = ROOT_API + "transaction/update/";
+    //    Route::post('transaction/update/{id}','Api\TransaksiController@update'); //update
+    //    method POST update
+    public static final String URL_UPDATE_TRANSACTION = ROOT_API + "transaction/update/";
 
-    //    method POST by ID
-    public static final String URL_DELETE = ROOT_API + "transaction/delete/";
+    //    Route::post('transaction/delete/{id}','Api\TransaksiController@destroy'); //delete
+    //    method POST delete
+    public static final String URL_DELETE_TRANSACTION = ROOT_API + "transaction/delete/";
 }
