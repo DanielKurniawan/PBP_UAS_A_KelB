@@ -68,6 +68,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtInputNamaDepan"
                         android:layout_width="match_parent"
+                        android:textColor="?attr/textcolor"
+                        android:textColorHint="?attr/textcolor"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,6 +86,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtInputNamaBelakang"
                         android:layout_width="match_parent"
+                        android:textColor="?attr/textcolor"
+                        android:textColorHint="?attr/textcolor"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,6 +104,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtInputAlamat"
                         android:layout_width="match_parent"
+                        android:textColor="?attr/textcolor"
+                        android:textColorHint="?attr/textcolor"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,6 +122,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtInputTanggalLahir"
                         android:layout_width="match_parent"
+                        android:textColor="?attr/textcolor"
+                        android:textColorHint="?attr/textcolor"
                         android:inputType="numberSigned"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -134,6 +142,8 @@
                         android:id="@+id/txtInputNomorTelepon"
                         android:layout_width="match_parent"
                         android:inputType="numberSigned"
+                        android:textColor="?attr/textcolor"
+                        android:textColorHint="?attr/textcolor"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,6 +160,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtInputEmail"
                         android:layout_width="match_parent"
+                        android:textColor="?attr/textcolor"
+                        android:textColorHint="?attr/textcolor"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -166,10 +178,10 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtInputPassword"
                         android:layout_width="match_parent"
+                        android:textColor="?attr/textcolor"
+                        android:textColorHint="?attr/textcolor"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
-
-
             </LinearLayout>
 
             <LinearLayout
