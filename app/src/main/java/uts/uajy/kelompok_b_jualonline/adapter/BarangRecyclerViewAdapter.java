@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.List;
 
 import uts.uajy.kelompok_b_jualonline.R;
 import uts.uajy.kelompok_b_jualonline.databinding.AdapterRecyclerViewBarangBinding;
-import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
+import uts.uajy.kelompok_b_jualonline.model.Barang;
 
 public class BarangRecyclerViewAdapter extends RecyclerView.Adapter<BarangRecyclerViewAdapter.MyViewHolder> {
     private Context context;
@@ -26,13 +27,14 @@ public class BarangRecyclerViewAdapter extends RecyclerView.Adapter<BarangRecycl
     //dataset Barang
     private List<Barang> listBarang;
     private List<Barang> cart;
-
+    private ExtendedFloatingActionButton addtocart;
     public AdapterRecyclerViewBarangBinding binding;
     public BarangRecyclerViewAdapter(){}
 
-    public BarangRecyclerViewAdapter(Context context, List<Barang> result){
+    public BarangRecyclerViewAdapter(Context context, List<Barang> result, ExtendedFloatingActionButton btnAddtoCart){
         this.context = context;
         this.listBarang = result;
+        this.addtocart = btnAddtoCart;
         cart = new ArrayList<Barang>();
     }
 
@@ -50,6 +52,7 @@ public class BarangRecyclerViewAdapter extends RecyclerView.Adapter<BarangRecycl
         final Barang b = listBarang.get(position);
         binding.setBarang(b);
         final int pos = position;
+        Toast.makeText(context, String.valueOf(b.getId()),Toast.LENGTH_SHORT).show();
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

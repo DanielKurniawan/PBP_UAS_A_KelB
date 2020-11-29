@@ -6,7 +6,7 @@
     <data>
         <variable
             name="barang"
-            type="uts.uajy.kelompok_b_jualonline.modelBarang.Barang" />
+            type="uts.uajy.kelompok_b_jualonline.model.Barang" />
     </data>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/CardView"

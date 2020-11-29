@@ -16,7 +16,7 @@ public class TransaksiAPI {
 
     //    Route::get('transaction','Api\TransaksiController@index'); //read all
     //    method GET read all
-    public static final String URL_GET_TRANSACTION = ROOT_API + "transaction/";
+    public static final String URL_GET_TRANSACTION = ROOT_API + "transaction";
 
     //    Route::post('transaction/update/{id}','Api\TransaksiController@update'); //update
     //    method POST update

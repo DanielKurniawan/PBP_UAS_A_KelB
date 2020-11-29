@@ -57,6 +57,9 @@ public class ActivityLogin extends AppCompatActivity {
         signin = findViewById(R.id.signin);
         signup = findViewById(R.id.signup);
 
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
+
         if(mFirebaseAuth.getCurrentUser() != null) {
 
            save(mFirebaseAuth.getCurrentUser());

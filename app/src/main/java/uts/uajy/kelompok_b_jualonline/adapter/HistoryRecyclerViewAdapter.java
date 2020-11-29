@@ -17,7 +17,7 @@ import java.util.List;
 
 import uts.uajy.kelompok_b_jualonline.R;
 import uts.uajy.kelompok_b_jualonline.databinding.AdapterRecyclerViewHistoryBinding;
-import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
+import uts.uajy.kelompok_b_jualonline.model.Barang;
 
 public class HistoryRecyclerViewAdapter extends RecyclerView.Adapter<HistoryRecyclerViewAdapter.MyViewHolder> {
     private Context context;

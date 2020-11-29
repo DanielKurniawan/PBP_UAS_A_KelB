@@ -2,17 +2,12 @@ package uts.uajy.kelompok_b_jualonline;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Space;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,26 +17,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.core.app.NotificationCompat;
-
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import uts.uajy.kelompok_b_jualonline.Fragment.Cart_Fragment;
-import uts.uajy.kelompok_b_jualonline.Fragment.Chat_Fragment;
+import uts.uajy.kelompok_b_jualonline.Fragment.History_Fragment;
 import uts.uajy.kelompok_b_jualonline.Fragment.Home_Fragment;
 import uts.uajy.kelompok_b_jualonline.Fragment.User_Fragment;
-import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
+import uts.uajy.kelompok_b_jualonline.model.Barang;
 import uts.uajy.kelompok_b_jualonline.persistencedata.sharedpref;
 
 public class MainActivity extends AppCompatActivity{
@@ -49,7 +35,7 @@ public class MainActivity extends AppCompatActivity{
 
     Fragment home_fragment  = new Home_Fragment();
     Fragment cart_fragment = new Cart_Fragment();
-    Fragment chat_fragment = new Chat_Fragment();
+    Fragment chat_fragment = new History_Fragment();
     Fragment user_fragment = new User_Fragment();
     public sharedpref sharedpref;
     public Bundle mBundle;

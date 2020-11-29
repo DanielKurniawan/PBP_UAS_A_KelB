@@ -19,7 +19,7 @@
         tools:layout="@layout/fragment_cart_" />
     <fragment
         android:id="@+id/Fragment_Chat"
-        android:name="uts.uajy.kelompok_b_jualonline.Fragment.Chat_Fragment"
+        android:name="uts.uajy.kelompok_b_jualonline.Fragment.History_Fragment"
         android:label="chat"
         tools:layout="@layout/fragment_chat_" />
     <fragment

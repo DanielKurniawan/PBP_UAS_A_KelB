@@ -8,7 +8,7 @@ public class BarangAPI {
 
     //    Route::post('barang','Api\BarangController@store'); // create
     //    method POST create
-    public static final String URL_REGISTER = ROOT_API + "barang";
+    public static final String URL_CREATE = ROOT_API + "barang";
 
     //    Route::get('barang/{id}','Api\BarangController@show'); //read selected by id
     //    method GET read selected by ID
@@ -16,7 +16,7 @@ public class BarangAPI {
 
     //    Route::get('barang','Api\BarangController@index'); //read all
     //    method GET read all
-    public static final String URL_GET = ROOT_API + "barang/";
+    public static final String URL_GET = ROOT_API + "barang";
 
     //    Route::post('barang/update/{id}','Api\BarangController@update'); //update
     //    method POST update

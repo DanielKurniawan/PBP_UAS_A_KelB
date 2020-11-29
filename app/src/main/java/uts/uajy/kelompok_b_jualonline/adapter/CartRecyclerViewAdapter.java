@@ -22,7 +22,7 @@ import java.util.List;
 
 import uts.uajy.kelompok_b_jualonline.R;
 import uts.uajy.kelompok_b_jualonline.databinding.AdapterRecyclerViewCartBinding;
-import uts.uajy.kelompok_b_jualonline.modelBarang.Barang;
+import uts.uajy.kelompok_b_jualonline.model.Barang;
 
 public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerViewAdapter.MyViewHolder> implements Filterable {
     private Context context;

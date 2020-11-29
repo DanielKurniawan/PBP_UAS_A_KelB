@@ -1,4 +1,4 @@
-package uts.uajy.kelompok_b_jualonline.modelBarang;
+package uts.uajy.kelompok_b_jualonline.model;
 
 import android.widget.ImageView;
 
@@ -31,6 +31,14 @@ public class Barang implements Serializable {
     @ColumnInfo(name = "imgUrl")
     public String imgUrl;
 
+    public Barang(int id, String namaBarang, String deskripsi, int harga,  String imgUrl) {
+        this.id = id;
+        this.namaBarang = namaBarang;
+        this.deskripsi = deskripsi;
+        this.harga = harga;
+        this.imgUrl = imgUrl;
+    }
+
     public Barang(String namaBarang, String deskripsi, int harga, String imgUrl) {
         this.namaBarang = namaBarang;
         this.deskripsi = deskripsi;
@@ -38,6 +46,9 @@ public class Barang implements Serializable {
         this.status = "belum";
         this.imgUrl = imgUrl;
     }
+
+
+
     public int getId() {
         return id;
     }

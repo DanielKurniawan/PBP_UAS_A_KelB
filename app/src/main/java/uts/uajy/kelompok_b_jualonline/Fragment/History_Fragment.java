@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import uts.uajy.kelompok_b_jualonline.R;
 import uts.uajy.kelompok_b_jualonline.persistencedata.sharedpref;
 
-public class Chat_Fragment extends Fragment {
+public class History_Fragment extends Fragment {
 
     sharedpref sharedpref;
     Boolean checkTheme;

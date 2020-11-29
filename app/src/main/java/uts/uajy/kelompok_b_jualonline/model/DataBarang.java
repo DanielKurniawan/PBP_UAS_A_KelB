@@ -1,4 +1,4 @@
-package uts.uajy.kelompok_b_jualonline.modelBarang;
+package uts.uajy.kelompok_b_jualonline.model;
 
 import java.util.ArrayList;
 import java.util.List;
