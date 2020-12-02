@@ -24,5 +24,5 @@ public class TransaksiAPI {
 
     //    Route::post('transaction/delete/{id}','Api\TransaksiController@destroy'); //delete
     //    method POST delete
-    public static final String URL_DELETE_TRANSACTION = ROOT_API + "transaction/delete/";
+    public static final String URL_DELETE_TRANSACTION_ID = ROOT_API + "transaction/delete/";
 }

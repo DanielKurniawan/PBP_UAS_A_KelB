@@ -1,5 +1,6 @@
 package uts.uajy.kelompok_b_jualonline.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
@@ -13,30 +14,45 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import uts.uajy.kelompok_b_jualonline.R;
+import uts.uajy.kelompok_b_jualonline.api.TransaksiAPI;
 import uts.uajy.kelompok_b_jualonline.databinding.AdapterRecyclerViewCartBinding;
 import uts.uajy.kelompok_b_jualonline.model.Barang;
+import uts.uajy.kelompok_b_jualonline.model.TransaksiItem;
+
+import static com.android.volley.Request.Method.DELETE;
+import static com.android.volley.Request.Method.POST;
 
 public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerViewAdapter.MyViewHolder> implements Filterable {
     private Context context;
 
     //dataset Barang
-    private List<Barang> cart,cartOriginal;
+    private List<Barang> cart, cartOriginal;
+    private List<TransaksiItem> listTransaksi;
 
     private AdapterRecyclerViewCartBinding binding;
 
     public CartRecyclerViewAdapter() {}
 
-    public CartRecyclerViewAdapter(Context context, List<Barang> cart) {
+    public CartRecyclerViewAdapter(Context context, List<Barang> cart, List<TransaksiItem> listTransaksi) {
         this.context = context;
         this.cart = cart;
+        this.listTransaksi = listTransaksi;
     }
 
     @NonNull
@@ -52,16 +68,17 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         final Barang b = cart.get(position);
         binding.setBarang(b);
         final int pos = position;
+
         //gk ono holder soal e gk iso di check
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 new MaterialAlertDialogBuilder(view.getContext())
-                        .setTitle("Are you sure want to delete this item ?")
+                        .setTitle("Are you sure want to delete this item ? " + String.valueOf(listTransaksi.get(position).getId()))
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-//                                delete(b,view);
+                                deleteTransaksiItem(String.valueOf(listTransaksi.get(position).getId()));
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -74,33 +91,6 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
             }
         });
     }
-
-//    private void delete(final Barang barang, final View view){
-//        class DeleteUser extends AsyncTask<Void, Void, Void> {
-//            MaterialTextView outputSubTotal;
-//            @Override
-//            protected Void doInBackground(Void... voids) {
-//
-//                //delete dulu
-//                DatabaseClient.getInstance(view.getContext().getApplicationContext()).getDatabase()
-//                        .barangDAO()
-//                        .delete(barang);
-//                return null;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Void aVoid) {
-//                super.onPostExecute(aVoid);
-//                //summon the toasty bread hehe
-//                Toast.makeText(view.getContext().getApplicationContext(), "Barang deleted, swipe to refresh", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//
-//        DeleteUser delete = new DeleteUser();
-//        delete.execute();
-//    }
-
-
 
     @Override
     public int getItemCount() {
@@ -167,4 +157,49 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
             //userList hasilnya hasil search
         }
     };
+
+    public void deleteTransaksiItem(String id_transaksi){
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("loading....");
+        progressDialog.setTitle("Menghapus data transaksi");
+        progressDialog.setProgressStyle(android.app.ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
+        //Memulai membuat permintaan request menghapus data ke jaringan
+        StringRequest stringRequest = new StringRequest(POST, TransaksiAPI.URL_DELETE_TRANSACTION_ID + id_transaksi, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Disini bagian jika response jaringan berhasil tidak terdapat ganguan/error
+                progressDialog.dismiss();
+                try {
+                    //Mengubah response string menjadi object
+                    JSONObject obj = new JSONObject(response);
+
+                    //obj.getString("message") digunakan untuk mengambil pesan message dari response
+                    Toast.makeText(context, obj.getString("message"), Toast.LENGTH_SHORT).show();
+
+//                    refresh datanya
+                    notifyDataSetChanged();
+//                    mListener.deleteItem(true);
+                    Toast.makeText(context, "Barang deleted, swipe to refresh", Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Disini bagian jika response jaringan terdapat ganguan/error
+                progressDialog.dismiss();
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
+        queue.add(stringRequest);
+    }
 }
