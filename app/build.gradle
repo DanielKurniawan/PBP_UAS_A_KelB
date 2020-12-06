@@ -95,4 +95,8 @@ dependencies {
 
     //fancy toast
     implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.8'
+
+    //unit testing
+    testCompile 'org.mockito:mockito-all:1.10.19'
+
 }

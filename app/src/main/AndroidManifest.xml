@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".EditProfileActivity"></activity>
-        <activity android:name=".AddOrEditReviewActivity" />
+        <activity android:name=".ReviewTest.AddOrEditReviewActivity" />
         <activity android:name=".ShowItemActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MapActivity" />

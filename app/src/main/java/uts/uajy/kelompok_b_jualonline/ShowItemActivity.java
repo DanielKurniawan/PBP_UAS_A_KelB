@@ -1,23 +1,17 @@
 package uts.uajy.kelompok_b_jualonline;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -30,7 +24,6 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.json.JSONArray;
@@ -42,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import uts.uajy.kelompok_b_jualonline.adapter.HistoryRecyclerViewAdapter;
+import uts.uajy.kelompok_b_jualonline.ReviewTest.AddOrEditReviewActivity;
 import uts.uajy.kelompok_b_jualonline.adapter.ReviewRecyclerViewAdapter;
 import uts.uajy.kelompok_b_jualonline.api.BarangAPI;
 import uts.uajy.kelompok_b_jualonline.api.ReviewAPI;
@@ -54,7 +47,6 @@ import www.sanju.motiontoast.MotionToast;
 
 import static com.android.volley.Request.Method.GET;
 import static com.android.volley.Request.Method.POST;
-import static com.android.volley.Request.Method.PUT;
 
 public class ShowItemActivity extends AppCompatActivity {
 

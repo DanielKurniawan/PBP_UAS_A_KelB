@@ -1,17 +1,12 @@
 package uts.uajy.kelompok_b_jualonline.adapter;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,19 +24,14 @@ import com.google.android.material.textview.MaterialTextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import uts.uajy.kelompok_b_jualonline.AddOrEditReviewActivity;
+import uts.uajy.kelompok_b_jualonline.ReviewTest.AddOrEditReviewActivity;
 import uts.uajy.kelompok_b_jualonline.R;
-import uts.uajy.kelompok_b_jualonline.ShowItemActivity;
 import uts.uajy.kelompok_b_jualonline.api.ReviewAPI;
-import uts.uajy.kelompok_b_jualonline.databinding.AdapterRecyclerViewBarangBinding;
 import uts.uajy.kelompok_b_jualonline.databinding.AdapterRecyclerViewReviewBinding;
-import uts.uajy.kelompok_b_jualonline.model.Barang;
 import uts.uajy.kelompok_b_jualonline.model.ReviewItem;
 
-import static com.android.volley.Request.Method.DELETE;
 import static com.android.volley.Request.Method.POST;
 
 public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecyclerViewAdapter.MyViewHolder> {
