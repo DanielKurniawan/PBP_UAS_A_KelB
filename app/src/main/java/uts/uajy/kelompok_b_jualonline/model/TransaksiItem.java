@@ -5,12 +5,22 @@ public class TransaksiItem {
     private int id_user;
     private int id_barang;
     private String status_bayar;
+    private Barang barang;
 
-    public TransaksiItem(int id, int id_user, int id_barang, String status_bayar) {
+    public TransaksiItem(int id, int id_user, int id_barang, String status_bayar, Barang barang) {
         this.id = id;
         this.id_user = id_user;
         this.id_barang = id_barang;
         this.status_bayar = status_bayar;
+        this.barang = barang;
+    }
+
+    public Barang getBarang() {
+        return barang;
+    }
+
+    public void setBarang(Barang barang) {
+        this.barang = barang;
     }
 
     public int getId() {

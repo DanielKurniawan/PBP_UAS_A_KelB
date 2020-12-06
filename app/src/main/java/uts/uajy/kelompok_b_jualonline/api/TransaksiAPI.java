@@ -2,7 +2,8 @@ package uts.uajy.kelompok_b_jualonline.api;
 
 public class TransaksiAPI {
 
-    public static final String ROOT_URL   = "https://180709738.000webhostapp.com/";
+//    public static final String ROOT_URL   = "https://180709738.000webhostapp.com/";
+    public static final String ROOT_URL   = "https://penjualanonline.apitubespbp.xyz/";
     public static final String ROOT_API   = ROOT_URL+ "api/";
     public static final String URL_IMAGE  = ROOT_URL+"images/";
 

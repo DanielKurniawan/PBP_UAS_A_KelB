@@ -13,45 +13,57 @@
         android:background="?attr/colorPrimary"
         android:gravity="center">
 
-        <ImageView
-            android:id="@+id/profile_picture"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/ic_baseline_account_circle_24"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/profile_picture"-->
+<!--            android:layout_width="140dp"-->
+<!--            android:layout_height="140dp"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:src="@drawable/ic_baseline_account_circle_24"/>-->
+<!--        android:layout_below="@id/profile_picture"-->
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/Profile"
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="@dimen/margin_16"
-            android:layout_below="@id/profile_picture"
             android:layout_centerHorizontal="true"
-            android:text="@string/user"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnEdit"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/Profile"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_margin="@dimen/margin_16"-->
+<!--            android:text="Edit Profile"-->
+<!--            android:backgroundTint="?attr/colorAccent"-->
+<!--            android:layout_gravity="center"/>-->
     </RelativeLayout>
 
-    <ScrollView
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/relative_layout">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/relative_layout"
             android:background="?attr/backgroundcolor"
             android:gravity="top">
 
             <LinearLayout
-                android:id="@+id/linlayEmail"
+                android:id="@+id/linlayNama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -62,9 +74,88 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/email"
+                    android:text="Nama"
+                    android:textColor="?attr/textcolor"
+                    android:textStyle="bold"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtNama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
                     android:textColor="?attr/textcolor"
                     style="@style/TextAppearance.MaterialComponents.Body1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linlayAlamat"
+                android:layout_below="@id/linlayNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="start"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp">
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat"
+                    android:textColor="?attr/textcolor"
+                    android:textStyle="bold"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtAlamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="?attr/textcolor"
+                    style="@style/TextAppearance.MaterialComponents.Body1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linlayNomorTelepon"
+                android:layout_below="@id/linlayAlamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="start"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp">
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nomor Telepon"
+                    android:textColor="?attr/textcolor"
+                    android:textStyle="bold"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtNomorTelepon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="?attr/textcolor"
+                    style="@style/TextAppearance.MaterialComponents.Body1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linlayEmail"
+                android:layout_below="@id/linlayNomorTelepon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="start"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp">
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email"
+                    android:textColor="?attr/textcolor"
+                    android:textStyle="bold"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"/>
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txtEmail"
                     android:layout_width="wrap_content"
@@ -90,7 +181,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/Profile"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="@dimen/margin_17"
                     android:text="About Developer"
                     android:backgroundTint="?attr/colorAccent"
                     android:layout_gravity="center"/>
@@ -104,7 +194,7 @@
                 android:gravity="start"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:layout_below="@id/linlayButton">
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_signout"
@@ -112,13 +202,12 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/Profile"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="@dimen/margin_17"
                     android:text="Sign Out"
                     android:backgroundTint="#ED2B2A"
                     android:layout_gravity="center"/>
             </LinearLayout>
         </RelativeLayout>
-    </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

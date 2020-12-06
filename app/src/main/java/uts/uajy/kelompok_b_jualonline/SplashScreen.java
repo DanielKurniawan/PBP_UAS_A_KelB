@@ -20,6 +20,7 @@ import uts.uajy.kelompok_b_jualonline.util.MessagingService;
 public class SplashScreen extends AppCompatActivity {
     private static int SPLASH_DURATION = 3000;
     public Boolean checkTheme;
+    private String id_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sharedPreferences = getSharedPreferences("filename", Context.MODE_PRIVATE);
@@ -39,18 +40,30 @@ public class SplashScreen extends AppCompatActivity {
         ImageView img = findViewById(R.id.splash_logo);
         img.setAnimation(splashAnim);
 
+        //dapetin id user
+        loadUserId();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashScreen.this,ActivityLogin.class);
-                startActivity(i);
-                finish();
+                if (id_user=="" || id_user==null){
+                    Intent i = new Intent(SplashScreen.this,ActivityLogin.class);
+                    startActivity(i);
+                    finish();
+                }
+                else {
+                    Intent i = new Intent(SplashScreen.this,MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         },SPLASH_DURATION);
 
         Animation myanim = AnimationUtils.loadAnimation(this,R.anim.animasi);
+    }
 
-
+    public void loadUserId(){
+        SharedPreferences sharedPreferences = getSharedPreferences("id_user", Context.MODE_PRIVATE);
+        id_user = sharedPreferences.getString("id_user","");
     }
 }

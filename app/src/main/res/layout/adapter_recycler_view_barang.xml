@@ -10,14 +10,13 @@
     </data>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/CardView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardBackgroundColor="?attr/cardbackground"
         tools:context=".RecyclerViewAdapter"
         android:clickable="true"
-        android:focusable="true"
-        android:checkable="true">
+        android:focusable="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,13 +52,14 @@
                     style="@style/TextAppearance.MaterialComponents.Subtitle2"
                     android:layout_marginTop="@dimen/margin_16"
                     android:layout_marginStart="@dimen/margin_16"
-                    android:layout_marginEnd="@dimen/margin_16"/>
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:visibility="gone"/>
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/hargaText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="?attr/textcolor"
-                    android:text="@{String.valueOf(barang.harga)}"
+                    android:text="@{`Rp `+String.valueOf(barang.harga)}"
                     style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_margin="@dimen/margin_16"/>
             </LinearLayout>

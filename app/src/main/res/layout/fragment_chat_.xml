@@ -34,11 +34,23 @@
             android:id="@+id/history_rv"
             android:layout_width="match_parent"
             android:layout_height="683dp"
-            android:layout_margin="20dp"
+            android:layout_margin="6dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="17dp"
             tools:listitem="@layout/adapter_recycler_view_history"/>
     </RelativeLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnDeteHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="@dimen/margin_20"
+            android:contentDescription="@string/fab_content_desc"
+            app:srcCompat="@drawable/ic_baseline_auto_delete_24"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

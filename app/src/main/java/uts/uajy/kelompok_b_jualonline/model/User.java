@@ -1,51 +1,11 @@
-package uts.uajy.kelompok_b_jualonline.userModel;
-
-import com.google.gson.annotations.SerializedName;
+package uts.uajy.kelompok_b_jualonline.model;
 
 public class User {
-    @SerializedName("id")
-    private String id;
+    private int id;
+    private String nama_depan, nama_belakang, alamat, tanggal_lahir, nomor_telepon, email, password, imageUrl;
+    public User(){}
 
-    @SerializedName("nama_depan")
-    private String nama_depan;
-
-    @SerializedName("nama_belakang")
-    private String nama_belakang;
-
-    @SerializedName("alamat")
-    private String alamat;
-
-    @SerializedName("tanggal_lahir")
-    private String tanggal_lahir;
-
-    @SerializedName("nomor_telepon")
-    private String nomor_telepon;
-
-    @SerializedName("email")
-    private String email;
-
-    @SerializedName("password")
-    private String password;
-
-    @SerializedName("imageUrl")
-    private String imageUrl;
-
-    @SerializedName("verification_status")
-    private String verification_status;
-
-    public User(String nama_depan, String nama_belakang, String alamat, String tanggal_lahir, String nomor_telepon, String email, String password, String imageUrl, String verification_status) {
-        this.nama_depan = nama_depan;
-        this.nama_belakang = nama_belakang;
-        this.alamat = alamat;
-        this.tanggal_lahir = tanggal_lahir;
-        this.nomor_telepon = nomor_telepon;
-        this.email = email;
-        this.password = password;
-        this.imageUrl = imageUrl;
-        this.verification_status = verification_status;
-    }
-
-    public User(String id, String nama_depan, String nama_belakang, String alamat, String tanggal_lahir, String nomor_telepon, String email, String password, String imageUrl, String verification_status) {
+    public User(int id, String nama_depan, String nama_belakang, String alamat, String tanggal_lahir, String nomor_telepon, String email, String password, String imageUrl) {
         this.id = id;
         this.nama_depan = nama_depan;
         this.nama_belakang = nama_belakang;
@@ -55,14 +15,24 @@ public class User {
         this.email = email;
         this.password = password;
         this.imageUrl = imageUrl;
-        this.verification_status = verification_status;
     }
 
-    public String getId() {
+    public User(int id, String nama_depan, String nama_belakang, String alamat, String tanggal_lahir, String nomor_telepon, String email, String imageUrl) {
+        this.id = id;
+        this.nama_depan = nama_depan;
+        this.nama_belakang = nama_belakang;
+        this.alamat = alamat;
+        this.tanggal_lahir = tanggal_lahir;
+        this.nomor_telepon = nomor_telepon;
+        this.email = email;
+        this.imageUrl = imageUrl;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -128,13 +98,5 @@ public class User {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public String getVerification_status() {
-        return verification_status;
-    }
-
-    public void setVerification_status(String verification_status) {
-        this.verification_status = verification_status;
     }
 }

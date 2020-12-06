@@ -19,11 +19,18 @@ import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,16 +38,26 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import uts.uajy.kelompok_b_jualonline.ActivityLogin;
+import uts.uajy.kelompok_b_jualonline.EditProfileActivity;
 import uts.uajy.kelompok_b_jualonline.MainActivity;
 import uts.uajy.kelompok_b_jualonline.R;
+import uts.uajy.kelompok_b_jualonline.api.BarangAPI;
+import uts.uajy.kelompok_b_jualonline.api.UserAPI;
+import uts.uajy.kelompok_b_jualonline.model.Barang;
+import uts.uajy.kelompok_b_jualonline.model.User;
 import uts.uajy.kelompok_b_jualonline.persistencedata.sharedpref;
+
+import static com.android.volley.Request.Method.GET;
 
 public class User_Fragment extends Fragment {
     private FloatingActionButton btnSettings;
-    private MaterialButton btnUpdateProfilePicture,btnSignout;
+    private MaterialButton btnUpdateProfilePicture,btnSignout, btnEdit;
     public SettingsFragment settingsFragment;
-    public MaterialTextView txtEmail;
+    public MaterialTextView txtNama, txtNamaFull, txtAlamat, txtTanggalLahir, txtNomorTelepon,txtEmail;
 
     //hardware
     private long lastUpdate=0;
@@ -51,7 +68,11 @@ public class User_Fragment extends Fragment {
     private int CAMERA_PERMISSION_CODE = 1;
 
     private String CHANNEL_ID = "Channel 1" ;
+    private String id_user;
 
+    private User user;
+
+    private SwipeRefreshLayout swipe_profile;
 
     Boolean checkTheme;
 
@@ -69,8 +90,23 @@ public class User_Fragment extends Fragment {
             getContext().setTheme(R.style.AppTheme);
         }
 
+
+
+        //load id user
+        loadUserId();
+
+        // get user dari id
+        getUser(Integer.parseInt(id_user), view);
+
+
         //retrieve the email
+        txtNama = view.findViewById(R.id.Profile);
+        txtNamaFull = view.findViewById(R.id.txtNama);
+        txtAlamat = view.findViewById(R.id.txtAlamat);
+        txtNomorTelepon = view.findViewById(R.id.txtNomorTelepon);
         txtEmail = view.findViewById(R.id.txtEmail);
+        swipe_profile = view.findViewById(R.id.swipe_profile);
+
         SharedPreferences sharedEmail = getContext().getSharedPreferences("userEmail",Context.MODE_PRIVATE);
         String email = sharedEmail.getString("email","");
         txtEmail.setText(email);
@@ -115,7 +151,8 @@ public class User_Fragment extends Fragment {
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                FirebaseAuth.getInstance().signOut();
+//                                FirebaseAuth.getInstance().signOut();
+                                deleteUserId(view);
                                 createNotificationChannel(view);
                                 addNotificaion("Goodbye","Comeback Again...",view);
                                 startActivity(new Intent(view.getContext(), ActivityLogin.class));
@@ -131,7 +168,27 @@ public class User_Fragment extends Fragment {
                         .show();
             }
         });
+
+        swipe_profile.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getUser(Integer.parseInt(id_user), view);
+                swipe_profile.setRefreshing(false);
+            }
+        });
         return view;
+    }
+
+    public void loadUserId(){
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("id_user", Context.MODE_PRIVATE);
+        id_user = sharedPreferences.getString("id_user","");
+    }
+
+    public void deleteUserId(View view) {
+        SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("id_user",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("id_user",null);
+        editor.commit();
     }
 
     public void createNotificationChannel(View view) {
@@ -164,5 +221,56 @@ public class User_Fragment extends Fragment {
         //tampil notifikasi
         NotificationManager manager = (NotificationManager) view.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(0, builder.build());
+    }
+
+    public void getUser(int id_user_parameter, View view) {
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+        //Meminta tanggapan string dari URL yang telah disediakan menggunakan method GET
+        //untuk request ini tidak memerlukan parameter
+
+        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, UserAPI.URL_GET_ID + String.valueOf(id_user_parameter), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //Disini bagian jika response jaringan berhasil tidak terdapat ganguan/error
+                try {
+
+                    //Mengambil data response json object yang berupa data barang
+                    JSONObject jsonObject = response.getJSONObject("data");
+
+                    int id                      = jsonObject.optInt("id");
+                    String nama_depan           = jsonObject.optString("nama_depan");
+                    String nama_belakang        = jsonObject.optString("nama_belakang");
+                    String alamat               = jsonObject.optString("alamat");
+                    String tanggal_lahir        = jsonObject.optString("tanggal_lahir");
+                    String nomor_telepon        = jsonObject.optString("nomor_telepon");
+                    String email                = jsonObject.optString("email");
+                    String imageUrl             = jsonObject.optString("imageUrl");
+
+                    //Membuat objek user
+                    User userKetemu = new User(id, nama_depan, nama_belakang, alamat, tanggal_lahir, nomor_telepon, email, imageUrl);
+
+                    txtNama.setText(nama_depan);
+                    txtNamaFull.setText(nama_depan+" "+nama_belakang);
+                    txtAlamat.setText(alamat);
+                    txtNomorTelepon.setText(nomor_telepon);
+                    txtEmail.setText(email);
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+//                Toast.makeText(getContext(), response.optString("message"), Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                //Disini bagian jika response jaringan terdapat ganguan/error
+                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
+        queue.add(stringRequest);
     }
 }

@@ -5,22 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
-
+    tools:context=".EditProfileActivity">
     <RelativeLayout
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:gravity="center">
-
-        <ImageView
-            android:id="@+id/profile_picture"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/logopbp"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/Profile"
@@ -29,10 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="@dimen/margin_20"
-            android:layout_below="@id/profile_picture"
             android:layout_centerHorizontal="true"
-            android:text="Registration Form "
-            android:textStyle="normal"
+            android:text="Edit User"
+            android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +39,6 @@
             android:layout_below="@id/relative_layout"
             android:background="?attr/backgroundcolor"
             android:gravity="top">
-
             <LinearLayout
                 android:id="@+id/linlayEmail"
                 android:layout_width="match_parent"
@@ -64,9 +53,10 @@
                     android:layout_marginTop="@dimen/margin_20"
                     android:layout_marginStart="@dimen/margin_20"
                     android:layout_marginEnd="@dimen/margin_20"
+                    app:errorEnabled="true"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtInputNamaDepan"
+                        android:id="@+id/txtInputNamaDepanEdit"
                         android:layout_width="match_parent"
                         android:textColor="?attr/textcolor"
                         android:textColorHint="?attr/textcolor"
@@ -78,13 +68,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nama Belakang"
-                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/margin_20"
                     android:layout_marginEnd="@dimen/margin_20"
+                    app:errorEnabled="true"
                     android:layout_below="@id/txtLayoutNamaDepan"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtInputNamaBelakang"
+                        android:id="@+id/txtInputNamaBelakangEdit"
                         android:layout_width="match_parent"
                         android:textColor="?attr/textcolor"
                         android:textColorHint="?attr/textcolor"
@@ -96,13 +87,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Alamat"
-                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/margin_20"
                     android:layout_marginEnd="@dimen/margin_20"
+                    app:errorEnabled="true"
                     android:layout_below="@id/txtLayoutNamaBelakang"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtInputAlamat"
+                        android:id="@+id/txtInputAlamatEdit"
                         android:layout_width="match_parent"
                         android:textColor="?attr/textcolor"
                         android:textColorHint="?attr/textcolor"
@@ -114,13 +106,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Tanggal Lahir"
-                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/margin_20"
                     android:layout_marginEnd="@dimen/margin_20"
+                    app:errorEnabled="true"
                     android:layout_below="@id/txtLayoutAlamat"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtInputTanggalLahir"
+                        android:id="@+id/txtInputTanggalLahirEdit"
                         android:layout_width="match_parent"
                         android:textColor="?attr/textcolor"
                         android:textColorHint="?attr/textcolor"
@@ -133,13 +126,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nomor Telepon"
-                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/margin_20"
                     android:layout_marginEnd="@dimen/margin_20"
+                    app:errorEnabled="true"
                     android:layout_below="@id/txtLayoutTanggalLahir"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtInputNomorTelepon"
+                        android:id="@+id/txtInputNomorTeleponEdit"
                         android:layout_width="match_parent"
                         android:inputType="numberSigned"
                         android:textColor="?attr/textcolor"
@@ -147,38 +141,26 @@
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sorry, you cannot change this"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    android:textStyle="bold"
+                    android:textColor="#FF0000"
+                    android:layout_margin="@dimen/margin_20"/>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtLayoutEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
-                    android:layout_marginTop="@dimen/margin_16"
                     android:layout_marginStart="@dimen/margin_20"
                     android:layout_marginEnd="@dimen/margin_20"
                     android:layout_below="@id/txtLayoutNomorTelepon"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtInputEmail"
-                        android:layout_width="match_parent"
-                        android:inputType="textEmailAddress"
-                        android:textColor="?attr/textcolor"
-                        android:textColorHint="?attr/textcolor"
-                        android:layout_height="wrap_content"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtLayoutPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Password"
-                    android:layout_marginTop="@dimen/margin_16"
-                    android:layout_marginStart="@dimen/margin_20"
-                    android:layout_marginEnd="@dimen/margin_20"
-                    android:layout_below="@id/txtLayoutEmail"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtInputPassword"
-                        android:inputType="textPassword"
+                        android:id="@+id/txtInputEmailEdit"
                         android:layout_width="match_parent"
                         android:textColor="?attr/textcolor"
                         android:textColorHint="?attr/textcolor"
@@ -198,10 +180,11 @@
                 android:layout_marginBottom="@dimen/margin_20"
                 android:layout_below="@id/linlayEmail">
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnRegisterF"
+                    android:id="@+id/btnSubmitEdit"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:text="Register"
+                    android:text="Submit"
+                    android:inputType="none"
                     android:layout_below="@id/txtLayoutPassword"
                     android:layout_marginTop="@dimen/margin_16"
                     android:layout_marginStart="@dimen/margin_20"

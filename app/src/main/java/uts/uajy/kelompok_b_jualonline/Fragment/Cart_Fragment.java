@@ -47,6 +47,7 @@ import uts.uajy.kelompok_b_jualonline.model.DataBarang;
 import uts.uajy.kelompok_b_jualonline.model.TransaksiItem;
 
 import static com.android.volley.Request.Method.GET;
+import static com.android.volley.Request.Method.POST;
 import static com.android.volley.Request.Method.PUT;
 
 
@@ -61,7 +62,6 @@ public class Cart_Fragment extends Fragment {
     // deklarasi komponen2 UI
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ExtendedFloatingActionButton addtocart;
     private CartRecyclerViewAdapter adapter;
     private SwipeRefreshLayout refreshLayout;
     private MaterialButton checkout;
@@ -71,7 +71,8 @@ public class Cart_Fragment extends Fragment {
     private Barang temporary;
 
     //variabel hitung2an
-    private int subtotal, ongkir;
+    private int subtotal, ongkir, id_transaksi, idUser, idBarang;
+    private String id_user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,7 +82,6 @@ public class Cart_Fragment extends Fragment {
         if(checkTheme) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             getContext().setTheme(R.style.darktheme);
-
         }
         else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -92,6 +92,10 @@ public class Cart_Fragment extends Fragment {
         listCart = new ArrayList<>();
         listTransaksi = new ArrayList<>();
 
+        //dapetin id usernya
+        loadUserId();
+
+        //definisi awal perhitungan harga
 
         // setting recyclerviewnya
         refreshLayout = view.findViewById(R.id.swipe_refresh);
@@ -106,28 +110,7 @@ public class Cart_Fragment extends Fragment {
         ongkirtxt = view.findViewById(R.id.ongkir);
 
         //get semua barangnya ke listCart
-        getBarangs(view);
-
-        // settings perhitungan harga berdasarkan getBarangs
-        subtotal = 0;
-        ongkir = 20000;
-        for(int i=0;i<listCart.size();i++)
-        {
-            subtotal=subtotal+listCart.get(i).getHarga();
-        }
-        Toast.makeText(view.getContext(), String.valueOf(subtotal), Toast.LENGTH_SHORT).show();
-        if (listCart.isEmpty()){
-            outputSubTotal.setText("Rp 0");
-            ongkirtxt.setText("Rp 0");
-            totalHarga.setText("Rp 0");
-        }
-        else
-        {
-            outputSubTotal.setText("Rp "+String.valueOf(subtotal));
-            ongkirtxt.setText("Rp 10000");
-            totalHarga.setText("Rp" + String.valueOf(subtotal+10000));
-        }
-
+        getBarangs(view, id_user);
 
         adapter = new CartRecyclerViewAdapter(view.getContext(), listCart, listTransaksi);
         recyclerView.setAdapter(adapter);
@@ -135,8 +118,8 @@ public class Cart_Fragment extends Fragment {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                getBarangs(view, id_user);
                 refreshLayout.setRefreshing(false);
-//                getBarangs(view);
             }
         });
 
@@ -150,7 +133,20 @@ public class Cart_Fragment extends Fragment {
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-//                                update(view);
+                                final ProgressDialog progressDialog;
+                                progressDialog = new ProgressDialog(view.getContext());
+                                progressDialog.setMessage("loading....");
+                                progressDialog.setTitle("Mengubah data mahasiswa");
+                                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                progressDialog.show();
+
+                                for(int a=0 ; a<listTransaksi.size() ; a++) {
+                                    id_transaksi = listTransaksi.get(a).getId();
+                                    idUser = listTransaksi.get(a).getId_user();
+                                    idBarang = listTransaksi.get(a).getId_barang();
+                                    editDataTransaksi(id_transaksi, idUser, idBarang, "sudah");
+                                }
+                                progressDialog.dismiss();
                                 Toast.makeText(getContext(), "Sudah terbeli, silahkan refresh", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -163,11 +159,17 @@ public class Cart_Fragment extends Fragment {
                         .show();
             }
         });
+
+
         return view;
     }
 
+    public void loadUserId(){
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("id_user", Context.MODE_PRIVATE);
+        id_user = sharedPreferences.getString("id_user","");
+    }
 
-    public void getBarangs(View view) {
+    public void getBarangs(View view, String id) {
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
         //Meminta tanggapan string dari URL yang telah disediakan menggunakan method GET
@@ -185,39 +187,35 @@ public class Cart_Fragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 //Disini bagian jika response jaringan berhasil tidak terdapat ganguan/error
-
-
                 try {
 
-                    if(!listCart.isEmpty() && !listTransaksi.isEmpty()) {
+                    if(!listCart.isEmpty() || !listTransaksi.isEmpty()) {
                         listCart.clear();
-                        listTransaksi.isEmpty();
+                        listTransaksi.clear();
                     }
-
+                    System.out.println(listCart.size());
+                    System.out.println(listTransaksi.size());
                     //Mengambil data response json object yang berupa data barang
                     JSONArray jsonArray = response.getJSONArray("data");
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
-//                        TODO ganti ==1 menjadi ==id user yang lagi login
-                        if(jsonObject.optInt("id_user")==1) {
+                        if(jsonObject.optInt("id_user")==Integer.parseInt(id)) {
                             int id            = jsonObject.optInt("id");
                             int id_user            = jsonObject.optInt("id_user");
                             int id_barang            = jsonObject.optInt("id_barang");
                             String status_bayar           = jsonObject.optString("status_bayar");
 
-                            //buat item transaksi buat delete
-//                            public TransaksiItem(int id, int id_user, int id_barang, String status_bayar)
-                            TransaksiItem ti = new TransaksiItem(id, id_user, id_barang, status_bayar);
-                            listTransaksi.add(ti);
-                            //inputannya id barang karena mau cari tiap barang sesuai dengan id yang sedang login
-                            getBarangItemFromEveryCart(id_barang, view);
+                            if(status_bayar.equalsIgnoreCase("belum")) {
+                                getBarangItemFromEveryCart(id_barang, view, id, id_user, id_barang, status_bayar);
+                            }
                         }
                     }
 
-//                    ini buat ngeupdate adapternya
+//                  ini buat ngeupdate adapternya
                     adapter.notifyDataSetChanged();
+
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -239,7 +237,7 @@ public class Cart_Fragment extends Fragment {
         queue.add(stringRequest);
     }
 
-    public void getBarangItemFromEveryCart(int id_barang, View view) {
+    public void getBarangItemFromEveryCart(int id_barang, View view, int id_transaksi, int id_user_transkasi, int id_barang_transaksi, String status_bayar_transaksi) {
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
         //Meminta tanggapan string dari URL yang telah disediakan menggunakan method GET
@@ -254,24 +252,41 @@ public class Cart_Fragment extends Fragment {
                     //Mengambil data response json object yang berupa data barang
                     JSONObject jsonObject = response.getJSONObject("data");
 
-//                    if(!listCart.isEmpty())
-//                        listCart.clear();
-
                         int id               = jsonObject.optInt("id");
                         String namaBarang       = jsonObject.optString("namaBarang");
                         String deskripsi        = jsonObject.optString("deskripsi");;
                         int harga            = jsonObject.optInt("harga");
                         String imgUrl           = jsonObject.optString("imgUrl");
 
-                        //Membuat objek barang
-                        temporary = new Barang(id,namaBarang, deskripsi, harga, imgUrl);
-                        listCart.add(temporary);
+                    //Membuat objek barang
+                    temporary = new Barang(id,namaBarang, deskripsi, harga, imgUrl);
+                    TransaksiItem ti = new TransaksiItem(id_transaksi, id_user_transkasi, id_barang_transaksi, status_bayar_transaksi, temporary);
+                    listTransaksi.add(ti);
 
-//                  TODO penyebab error
+                    subtotal = 0;
+                    ongkir = 20000;
+
+                    for(int i=0;i<listTransaksi.size();i++)
+                    {
+                        subtotal = subtotal + listTransaksi.get(i).getBarang().getHarga();
+                    }
+                    Toast.makeText(view.getContext(), String.valueOf(subtotal), Toast.LENGTH_SHORT).show();
+                    if (listTransaksi.isEmpty()){
+                        outputSubTotal.setText("Rp -");
+                        ongkirtxt.setText("Rp -");
+                        totalHarga.setText("Rp -");
+                    }
+                    else
+                    {
+                        outputSubTotal.setText("Rp "+String.valueOf(subtotal));
+                        ongkirtxt.setText("Rp 10000");
+                        totalHarga.setText("Rp" + String.valueOf(subtotal+10000));
+                    }
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
 //                Toast.makeText(getContext(), response.optString("message"), Toast.LENGTH_SHORT).show();
+                adapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -281,6 +296,57 @@ public class Cart_Fragment extends Fragment {
                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
+        queue.add(stringRequest);
+    }
+
+    public void editDataTransaksi(int id_transaksi, int idUser, int idBarang, String status_bayar){
+        //Pendeklarasian queue
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+
+        //Memulai membuat permintaan request menghapus data ke jaringan
+        StringRequest  stringRequest = new StringRequest(POST, TransaksiAPI.URL_UPDATE_TRANSACTION + id_transaksi, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Disini bagian jika response jaringan berhasil tidak terdapat ganguan/error
+
+                try {
+                    //Mengubah response string menjadi object
+                    JSONObject obj = new JSONObject(response);
+
+                    //obj.getString("message") digunakan untuk mengambil pesan message dari response
+                    Toast.makeText(getContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Disini bagian jika response jaringan terdapat ganguan/error
+                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                /*
+                    Disini adalah proses memasukan/mengirimkan parameter key dengan data value,
+                    dan nama key nya harus sesuai dengan parameter key yang diminta oleh jaringan
+                    API.
+                */
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("id_user", String.valueOf(idUser));
+                params.put("id_barang", String.valueOf(idBarang));
+                params.put("status_bayar", status_bayar);
+
+                return params;
+            }
+        };
 
         //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
         queue.add(stringRequest);

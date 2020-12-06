@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -34,11 +35,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import uts.uajy.kelompok_b_jualonline.ActivityLogin;
 import uts.uajy.kelompok_b_jualonline.adapter.BarangRecyclerViewAdapter;
 import uts.uajy.kelompok_b_jualonline.R;
 import uts.uajy.kelompok_b_jualonline.api.BarangAPI;
 import uts.uajy.kelompok_b_jualonline.api.TransaksiAPI;
 import uts.uajy.kelompok_b_jualonline.model.Barang;
+import www.sanju.motiontoast.MotionToast;
 
 import static com.android.volley.Request.Method.GET;
 import static com.android.volley.Request.Method.POST;
@@ -70,7 +73,7 @@ public class Home_Fragment extends Fragment {
         listBarang = new ArrayList<>();
         listCart = new ArrayList<Barang>();
 
-        getBarangs();
+        getBarangs(view);
 
         adapter = new BarangRecyclerViewAdapter(getContext(),listBarang,addtocart);
         recyclerView = view.findViewById(R.id.recyclerview_Barang);
@@ -80,7 +83,7 @@ public class Home_Fragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         addtocart = view.findViewById(R.id.extended_fab);
-
+        addtocart.hide();
         addtocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +92,7 @@ public class Home_Fragment extends Fragment {
                 }
                 else {
                     Toast.makeText(view.getContext(),"Not Empty",Toast.LENGTH_SHORT).show();
-                    listCart = adapter.returnCart();
+//                    listCart = adapter.returnCart();
                     for(int i=0 ; i<listCart.size() ; i++) {
                         addFromHomeToCart(listBarang.get(i).getId(), 1, "belum");
                     }
@@ -107,7 +110,7 @@ public class Home_Fragment extends Fragment {
     }
 
 
-    public void getBarangs() {
+    public void getBarangs(View view) {
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
         //Meminta tanggapan string dari URL yang telah disediakan menggunakan method GET
@@ -151,8 +154,8 @@ public class Home_Fragment extends Fragment {
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
-                Toast.makeText(getContext(), response.optString("message"),
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), response.optString("message"),
+//                        Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override

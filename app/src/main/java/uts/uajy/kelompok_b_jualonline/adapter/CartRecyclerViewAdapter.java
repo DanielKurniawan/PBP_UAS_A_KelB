@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
@@ -29,11 +30,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import uts.uajy.kelompok_b_jualonline.EditProfileActivity;
 import uts.uajy.kelompok_b_jualonline.R;
 import uts.uajy.kelompok_b_jualonline.api.TransaksiAPI;
 import uts.uajy.kelompok_b_jualonline.databinding.AdapterRecyclerViewCartBinding;
 import uts.uajy.kelompok_b_jualonline.model.Barang;
 import uts.uajy.kelompok_b_jualonline.model.TransaksiItem;
+import www.sanju.motiontoast.MotionToast;
 
 import static com.android.volley.Request.Method.DELETE;
 import static com.android.volley.Request.Method.POST;
@@ -65,7 +68,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull CartRecyclerViewAdapter.MyViewHolder holder, int position) {
-        final Barang b = cart.get(position);
+        final Barang b = listTransaksi.get(position).getBarang();
         binding.setBarang(b);
         final int pos = position;
 
@@ -94,7 +97,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
     @Override
     public int getItemCount() {
-        return cart.size();
+        return listTransaksi.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -184,8 +187,21 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
 //                    refresh datanya
                     notifyDataSetChanged();
+                    int indexBarang = 0;
+                    for(int i=0 ; i<listTransaksi.size() ; i++) {
+                        if(listTransaksi.get(i).getId() == Integer.parseInt(id_transaksi)){
+                            indexBarang = listTransaksi.get(i).getId_barang();
+                            Toast.makeText(context,String.valueOf(indexBarang) , Toast.LENGTH_SHORT).show();
+                            listTransaksi.remove(i);
+                            for (int j=0 ; j<cart.size() ; j++) {
+                                if(cart.get(j).getId() == indexBarang) {
+                                    cart.remove(j);
+                                }
+                            }
+                        }
+                    }
 //                    mListener.deleteItem(true);
-                    Toast.makeText(context, "Barang deleted, swipe to refresh", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "Barang deleted, swipe to refresh", Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

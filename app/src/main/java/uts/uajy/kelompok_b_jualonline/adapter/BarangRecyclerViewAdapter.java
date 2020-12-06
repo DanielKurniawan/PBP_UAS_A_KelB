@@ -1,6 +1,8 @@
 package uts.uajy.kelompok_b_jualonline.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uts.uajy.kelompok_b_jualonline.R;
+import uts.uajy.kelompok_b_jualonline.ShowItemActivity;
 import uts.uajy.kelompok_b_jualonline.databinding.AdapterRecyclerViewBarangBinding;
 import uts.uajy.kelompok_b_jualonline.model.Barang;
 
@@ -53,8 +56,14 @@ public class BarangRecyclerViewAdapter extends RecyclerView.Adapter<BarangRecycl
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.cardView.setChecked(!holder.cardView.isChecked());
-                addorremoveTitle(view, holder, b);
+//                holder.cardView.setChecked(!holder.cardView.isChecked());
+//                addorremoveTitle(view, holder, b);
+                Intent i = new Intent(context, ShowItemActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putString("id_barang",String.valueOf(b.getId()));
+                Toast.makeText(context,String.valueOf(b.getId()) , Toast.LENGTH_SHORT).show();
+                i.putExtra("id",mBundle);
+                context.startActivity(i);
             }
         });
     }
