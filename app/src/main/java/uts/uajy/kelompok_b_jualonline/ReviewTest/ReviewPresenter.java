@@ -8,6 +8,7 @@ public class ReviewPresenter {
     private ReviewView view;
     private ReviewService service;
     private ReviewCallback callback;
+    private String status;
 
     public ReviewPresenter(ReviewView view, ReviewService service) {
         this.view = view;
@@ -15,18 +16,22 @@ public class ReviewPresenter {
     }
 
     public void onAddReviewClicked(){
+        loadReviewStatus();
+        Toast.makeText(view.getContext(), status, Toast.LENGTH_SHORT).show();
         System.out.println(">>>>>>>>>>>> Masuk presenter");
         if(view.getReview().isEmpty()) {
             saveAddedReview("");
             view.showReviewError("Review tidak boleh kosong");
         }
         else {
+            if(view.getStatus().equalsIgnoreCase("add")){
                 service.addReview(view, view.getIdUser(), view.getIdBarang(), view.getReview(), new ReviewCallback() {
                     @Override
                     public void onSuccess(boolean value) {
-                        saveAddedReview("success");
+//                        saveAddedReview("success");
                         view.startMainActivity();
-                        view.getContext().getApplicationContext();
+                        view.getEditActivity().onBackPressed();
+//                        view.getContext().getApplicationContext();
                     }
 
                     @Override
@@ -34,6 +39,22 @@ public class ReviewPresenter {
                         saveAddedReview("");
                     }
                 });
+            }
+            else{
+                service.editReview(view, (view.getIdReview()), view.getReview(), new ReviewCallback() {
+                    @Override
+                    public void onSuccess(boolean value) {
+//                        saveAddedReview("success");
+                        view.startMainActivity();
+                        view.getEditActivity().onBackPressed();
+                    }
+
+                    @Override
+                    public void onError() {
+                        saveAddedReview("");
+                    }
+                });
+            }
                 return;
 //            if(status.equalsIgnoreCase("add"))
 //            {
@@ -51,5 +72,10 @@ public class ReviewPresenter {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("review_add",status);
         editor.commit();
+    }
+
+    public void loadReviewStatus(){
+        SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("id_user", Context.MODE_PRIVATE);
+        status = sharedPreferences.getString("id_user","");
     }
 }

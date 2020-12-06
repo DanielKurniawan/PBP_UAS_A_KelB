@@ -171,8 +171,8 @@ public class History_Fragment extends Fragment {
 
                             if (status_bayar.equalsIgnoreCase("sudah")) {
                                 //inputannya id barang karena mau cari tiap barang sesuai dengan id yang sedang login
-//                                TransaksiItem ti = new TransaksiItem(id, id_user, id_barang, status_bayar);
-//                                listTransaksiSudah.add(ti);
+                                TransaksiItem ti = new TransaksiItem(id, id_user, id_barang, status_bayar, null);
+                                listTransaksiSudah.add(ti);
 
                                 getBarangItemFromEveryCart(id_barang, view);
                             }
@@ -257,7 +257,6 @@ public class History_Fragment extends Fragment {
         //Tambahkan hapus buku disini
         //Pendeklarasian queue
         RequestQueue queue = Volley.newRequestQueue(context);
-
 
         //Memulai membuat permintaan request menghapus data ke jaringan
         StringRequest stringRequest = new StringRequest(POST, TransaksiAPI.URL_DELETE_TRANSACTION_ID + id_transaksi, new Response.Listener<String>() {

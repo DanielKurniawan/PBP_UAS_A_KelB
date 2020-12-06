@@ -184,9 +184,9 @@ public class ActivityLogin extends AppCompatActivity {
 
                         createNotificationChannel();
                         addNotification();
-                        MotionToast.Companion.createToast(ActivityLogin.this,
-                                "Hurray success",
-                                "Upload Completed successfully!",
+                        MotionToast.Companion.createColorToast(ActivityLogin.this,
+                                "Login Success !",
+                                "Welcome back, User",
                                 MotionToast.TOAST_SUCCESS,
                                 MotionToast.GRAVITY_BOTTOM,
                                 MotionToast.LONG_DURATION,

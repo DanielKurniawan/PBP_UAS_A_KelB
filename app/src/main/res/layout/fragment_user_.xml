@@ -36,16 +36,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/btnEdit"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@id/Profile"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_margin="@dimen/margin_16"-->
-<!--            android:text="Edit Profile"-->
-<!--            android:backgroundTint="?attr/colorAccent"-->
-<!--            android:layout_gravity="center"/>-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Profile"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_16"
+            android:text="Edit Profile"
+            android:backgroundTint="?attr/colorAccent"
+            android:layout_gravity="center"/>
     </RelativeLayout>
 
 

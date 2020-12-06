@@ -88,15 +88,12 @@ public class Home_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (adapter.returnCart().isEmpty()) {
-                    Toast.makeText(view.getContext(),"Empty",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(view.getContext(),"Not Empty",Toast.LENGTH_SHORT).show();
-//                    listCart = adapter.returnCart();
                     for(int i=0 ; i<listCart.size() ; i++) {
                         addFromHomeToCart(listBarang.get(i).getId(), 1, "belum");
                     }
-                    Toast.makeText(view.getContext(),"List Acquired",Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

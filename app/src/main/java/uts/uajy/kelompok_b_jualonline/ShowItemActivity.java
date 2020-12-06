@@ -75,7 +75,6 @@ public class ShowItemActivity extends AppCompatActivity {
 
         b = getIntent().getBundleExtra("id");
         id_barang = b.getString("id_barang");
-        Toast.makeText(this, "oncreate : "+  id_barang, Toast.LENGTH_SHORT).show();
 
         // get barangnya
         getBarang(id_barang);
@@ -90,8 +89,6 @@ public class ShowItemActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
-        Toast.makeText(this, String.valueOf(reviewItemList.size()), Toast.LENGTH_SHORT).show();
 
         //definisi button2
         btnAddToCart = findViewById(R.id.btnAddToCart);
@@ -123,7 +120,6 @@ public class ShowItemActivity extends AppCompatActivity {
                 Bundle mBundle = new Bundle();
                 mBundle.putString("id_barang",id_barang);
                 mBundle.putString("status","add");
-                Toast.makeText(ShowItemActivity.this,id_barang, Toast.LENGTH_SHORT).show();
                 i.putExtra("id",mBundle);
                 startActivity(i);
             }
@@ -148,7 +144,6 @@ public class ShowItemActivity extends AppCompatActivity {
 
         //Meminta tanggapan string dari URL yang telah disediakan menggunakan method GET
         //untuk request ini tidak memerlukan parameter
-        Toast.makeText(this, "getBarang : " + id_barang, Toast.LENGTH_SHORT).show();
         final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, BarangAPI.URL_GET_ID + id_barang, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -215,7 +210,6 @@ public class ShowItemActivity extends AppCompatActivity {
 
         //Meminta tanggapan string dari URL yang telah disediakan menggunakan method GET
         //untuk request ini tidak memerlukan parameter
-        Toast.makeText(this, "getBarang : " + id_barang, Toast.LENGTH_SHORT).show();
         final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, ReviewAPI.URL_GET, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -238,8 +232,6 @@ public class ShowItemActivity extends AppCompatActivity {
 
                         if (id_user == Integer.parseInt(id_user_from_sp)) {
                             if (id_barang == Integer.parseInt(id_barang_yang_ditampilkan)) {
-                                Toast.makeText(ShowItemActivity.this, "Ada reviewnya", Toast.LENGTH_SHORT).show();
-
                                 ReviewItem r = new ReviewItem(id, id_user, id_barang, review);
                                 reviewItemList.add(r);
                             }

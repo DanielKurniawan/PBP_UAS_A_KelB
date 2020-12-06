@@ -61,7 +61,6 @@ public class BarangRecyclerViewAdapter extends RecyclerView.Adapter<BarangRecycl
                 Intent i = new Intent(context, ShowItemActivity.class);
                 Bundle mBundle = new Bundle();
                 mBundle.putString("id_barang",String.valueOf(b.getId()));
-                Toast.makeText(context,String.valueOf(b.getId()) , Toast.LENGTH_SHORT).show();
                 i.putExtra("id",mBundle);
                 context.startActivity(i);
             }

@@ -74,9 +74,57 @@ public class ReviewService {
         //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
         queue.add(stringRequest);
     }
+    public void editReview(ReviewView view,String id_review, String review, ReviewCallback callback){
+        //Pendeklarasian queue
+        RequestQueue queue = Volley.newRequestQueue(view.getContext());
 
+        //Memulai membuat permintaan request menghapus data ke jaringan
+        StringRequest  stringRequest = new StringRequest(POST, ReviewAPI.URL_UPDATE + id_review, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Disini bagian jika response jaringan berhasil tidak terdapat ganguan/error
+
+                try {
+                    //Mengubah response string menjadi object
+                    JSONObject obj = new JSONObject(response);
+                    //obj.getString("message") digunakan untuk mengambil pesan message dari response
+//                    Toast.makeText(getApplicationContext(), "Review : "+review, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), ReviewAPI.URL_UPDATE + id_review, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                    MotionToast.Companion.createColorToast(view.getEditActivity(),"Review Edited !",obj.getString("message"),
+                            MotionToast.TOAST_SUCCESS,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(view.getContext(),R.font.helvetica_regular));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Disini bagian jika response jaringan terdapat ganguan/error
+                Toast.makeText(view.getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                /*
+                    Disini adalah proses memasukan/mengirimkan parameter key dengan data value,
+                    dan nama key nya harus sesuai dengan parameter key yang diminta oleh jaringan
+                    API.
+                */
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("review", review);
+                return params;
+            }
+        };
+
+        //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
+        queue.add(stringRequest);
+    }
     public Boolean getValid(final ReviewView view, String id_user_parameter, String id_barang_parameter, String review_parameter){
-
         // kenapa pake array kalo cuma dipake index pertama aja, knp gk variabel bool biasa
         final Boolean[] bool = new Boolean[1];
         addReview(view, id_user_parameter, id_barang_parameter, review_parameter , new ReviewCallback() {

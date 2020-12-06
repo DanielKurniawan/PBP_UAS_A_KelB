@@ -7,6 +7,9 @@ public interface ReviewView {
     String getReview();
     String getIdUser();
     String getIdBarang();
+    String getIdReview();
+    String getSReview();
+    String getStatus();
     void showReviewError(String message);
     void startMainActivity();
     void showAddError(String message);

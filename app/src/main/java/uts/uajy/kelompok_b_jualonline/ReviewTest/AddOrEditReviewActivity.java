@@ -70,12 +70,13 @@ public class AddOrEditReviewActivity extends AppCompatActivity implements Review
         btnSubmitReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                saveReviewStatus(status);
                 presenter.onAddReviewClicked();
                 System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ON BACKPRESSED");
                 loadAddedStatus();
-                if (status_from_sp.equalsIgnoreCase("success")) {
-                    onBackPressed();
-                }
+//                if (status_from_sp.equalsIgnoreCase("success")) {
+//                    onBackPressed();
+//                }
 //                if(review.getText().toString().isEmpty()) {
 //                    Toast.makeText(AddOrEditReviewActivity.this, "Review tidak boleh kosong", Toast.LENGTH_SHORT).show();
 //                    review.setError("Review tidak boleh kosong");
@@ -159,57 +160,64 @@ public class AddOrEditReviewActivity extends AppCompatActivity implements Review
 //        queue.add(stringRequest);
 //    }
 
-    public void editReview(int id_review, String review){
-        //Pendeklarasian queue
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+//    public void editReview(int id_review, String review){
+//        //Pendeklarasian queue
+//        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+//
+//
+//        //Memulai membuat permintaan request menghapus data ke jaringan
+//        StringRequest  stringRequest = new StringRequest(POST, ReviewAPI.URL_UPDATE + id_review, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                //Disini bagian jika response jaringan berhasil tidak terdapat ganguan/error
+//
+//                try {
+//                    //Mengubah response string menjadi object
+//                    JSONObject obj = new JSONObject(response);
+//
+//                    //obj.getString("message") digunakan untuk mengambil pesan message dari response
+////                    Toast.makeText(getApplicationContext(), "Review : "+review, Toast.LENGTH_SHORT).show();
+////                    Toast.makeText(getApplicationContext(), ReviewAPI.URL_UPDATE + id_review, Toast.LENGTH_SHORT).show();
+////                    Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+//                    MotionToast.Companion.createColorToast(AddOrEditReviewActivity.this,"Review Edited !","You've successfully edited your previous product review",
+//                            MotionToast.TOAST_SUCCESS,
+//                            MotionToast.GRAVITY_BOTTOM,
+//                            MotionToast.LONG_DURATION,
+//                            ResourcesCompat.getFont(getApplicationContext(),R.font.helvetica_regular));
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                //Disini bagian jika response jaringan terdapat ganguan/error
+//                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        }){
+//            @Override
+//            protected Map<String, String> getParams()
+//            {
+//                /*
+//                    Disini adalah proses memasukan/mengirimkan parameter key dengan data value,
+//                    dan nama key nya harus sesuai dengan parameter key yang diminta oleh jaringan
+//                    API.
+//                */
+//                Map<String, String>  params = new HashMap<String, String>();
+//                params.put("review", review);
+//                return params;
+//            }
+//        };
+//
+//        //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
+//        queue.add(stringRequest);
+//    }
 
-
-        //Memulai membuat permintaan request menghapus data ke jaringan
-        StringRequest  stringRequest = new StringRequest(POST, ReviewAPI.URL_UPDATE + id_review, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                //Disini bagian jika response jaringan berhasil tidak terdapat ganguan/error
-
-                try {
-                    //Mengubah response string menjadi object
-                    JSONObject obj = new JSONObject(response);
-
-                    //obj.getString("message") digunakan untuk mengambil pesan message dari response
-//                    Toast.makeText(getApplicationContext(), "Review : "+review, Toast.LENGTH_SHORT).show();
-//                    Toast.makeText(getApplicationContext(), ReviewAPI.URL_UPDATE + id_review, Toast.LENGTH_SHORT).show();
-//                    Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                    MotionToast.Companion.createColorToast(AddOrEditReviewActivity.this,"Review Edited !","You've successfully edited your previous product review",
-                            MotionToast.TOAST_SUCCESS,
-                            MotionToast.GRAVITY_BOTTOM,
-                            MotionToast.LONG_DURATION,
-                            ResourcesCompat.getFont(getApplicationContext(),R.font.helvetica_regular));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //Disini bagian jika response jaringan terdapat ganguan/error
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams()
-            {
-                /*
-                    Disini adalah proses memasukan/mengirimkan parameter key dengan data value,
-                    dan nama key nya harus sesuai dengan parameter key yang diminta oleh jaringan
-                    API.
-                */
-                Map<String, String>  params = new HashMap<String, String>();
-                params.put("review", review);
-                return params;
-            }
-        };
-
-        //Disini proses penambahan request yang sudah kita buat ke reuest queue yang sudah dideklarasi
-        queue.add(stringRequest);
+    public void saveReviewStatus(String status) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("status_profile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("review_status",status);
+        editor.commit();
     }
 
     @Override
@@ -225,6 +233,21 @@ public class AddOrEditReviewActivity extends AppCompatActivity implements Review
     @Override
     public String getIdBarang() {
         return id_barang;
+    }
+
+    @Override
+    public String getIdReview() {
+        return id_review;
+    }
+
+    @Override
+    public String getSReview() {
+        return sReview;
+    }
+
+    @Override
+    public String getStatus() {
+        return status;
     }
 
     @Override
